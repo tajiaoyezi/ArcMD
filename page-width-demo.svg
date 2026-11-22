@@ -1,0 +1,280 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" role="img" aria-label="ArcMD 页面宽度与全宽模式动图：点击右上角页面宽度按钮切换较宽与全宽，宽表格与正文自动铺满编辑视口，支持快捷键 Option+Command+P（Windows 为 Ctrl+Alt+P）一键往返并记忆切换前的列宽。">
+<style>
+.t{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",Helvetica,Arial,sans-serif}
+.m{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace}
+.s{animation-duration:16s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+@keyframes pgStd{0%,28.125%{opacity:1}30.625%,93.750%{opacity:0}97.500%,100%{opacity:1}}.pgStd{animation-name:pgStd}
+@keyframes pgWide{0%,28.125%{opacity:0}30.625%,57.500%{opacity:1}60.000%,82.500%{opacity:0}84.375%,93.750%{opacity:1}97.500%,100%{opacity:0}}.pgWide{animation-name:pgWide}
+@keyframes pgFull{0%,57.500%{opacity:0}60.000%,82.500%{opacity:1}84.375%,100%{opacity:0}}.pgFull{animation-name:pgFull}
+@keyframes btnOn{0%,28.750%{opacity:0}30.625%,93.750%{opacity:1}96.875%,100%{opacity:0}}.btnOn{animation-name:btnOn}
+@keyframes btnHover{0%,13.125%{opacity:0}15.000%,19.375%{opacity:1}21.250%,43.750%{opacity:0}45.625%,50.000%{opacity:1}51.875%,100%{opacity:0}}.btnHover{animation-name:btnHover}
+@keyframes icUnfold{0%,57.500%{opacity:1}59.375%,82.500%{opacity:0}84.375%,100%{opacity:1}}.icUnfold{animation-name:icUnfold}
+@keyframes icFold{0%,57.500%{opacity:0}59.375%,82.500%{opacity:1}84.375%,100%{opacity:0}}.icFold{animation-name:icFold}
+@keyframes pop1{0%,15.625%{opacity:0;transform:translateY(-4px) scale(.96)}17.500%,28.125%{opacity:1;transform:none}30.000%,100%{opacity:0;transform:translateY(-4px) scale(.96)}}.pop1{animation-name:pop1;transform-box:fill-box;transform-origin:top center}
+@keyframes rowWideHi{0%,21.250%{opacity:0}23.125%,28.125%{opacity:1}29.375%,100%{opacity:0}}.rowWideHi{animation-name:rowWideHi}
+@keyframes pop2{0%,46.875%{opacity:0;transform:translateY(-4px) scale(.96)}48.750%,57.500%{opacity:1;transform:none}59.375%,100%{opacity:0;transform:translateY(-4px) scale(.96)}}.pop2{animation-name:pop2;transform-box:fill-box;transform-origin:top center}
+@keyframes rowFullHi{0%,51.875%{opacity:0}53.750%,57.500%{opacity:1}58.750%,100%{opacity:0}}.rowFullHi{animation-name:rowFullHi}
+@keyframes hudKey{0%,76.250%{opacity:0;transform:translateY(8px)}78.438%,89.375%{opacity:1;transform:none}91.875%,100%{opacity:0;transform:translateY(8px)}}.hudKey{animation-name:hudKey}
+@keyframes ptr{0%,6.875%{opacity:0;transform:translate(820px,220px)}9.375%{opacity:1;transform:translate(820px,220px)}14.375%,18.750%{opacity:1;transform:translate(996px,24px)}22.500%,28.750%{opacity:1;transform:translate(998px,120px)}32.500%,41.250%{opacity:1;transform:translate(920px,230px)}45.000%,49.375%{opacity:1;transform:translate(996px,24px)}53.125%,58.125%{opacity:1;transform:translate(998px,150px)}61.875%,72.500%{opacity:1;transform:translate(900px,240px)}75.625%,100%{opacity:0;transform:translate(900px,240px)}}.ptr{animation-name:ptr}
+@keyframes cap0{0%,29.375%{opacity:1}31.875%,94.375%{opacity:.38}97.500%,100%{opacity:1}}.cap0{animation-name:cap0}
+@keyframes cap1{0%,29.375%{opacity:.38}31.875%,75.625%{opacity:1}78.125%,100%{opacity:.38}}.cap1{animation-name:cap1}
+@keyframes cap2{0%,75.625%{opacity:.38}78.125%,94.375%{opacity:1}97.500%,100%{opacity:.38}}.cap2{animation-name:cap2}
+@media(prefers-reduced-motion:reduce){.s{animation:none!important}.ptr,.pgStd,.pgWide,.pop1,.pop2,.btnHover,.icUnfold,.hudKey{display:none}.pgFull,.btnOn,.icFold,.cap0,.cap1,.cap2{opacity:1!important;transform:none!important}}
+</style>
+<defs>
+<clipPath id="stage"><rect width="1280" height="820" rx="28"/></clipPath>
+<clipPath id="win"><rect width="1240" height="760" rx="12"/></clipPath>
+<clipPath id="card"><rect x="230" y="46" width="1002" height="706" rx="10"/></clipPath>
+<linearGradient id="stageBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fafe"/><stop offset=".52" stop-color="#f5f7fc"/><stop offset="1" stop-color="#eef5fd"/></linearGradient>
+<radialGradient id="glowBlue"><stop stop-color="#6ec1e4" stop-opacity=".5"/><stop offset=".55" stop-color="#6ec1e4" stop-opacity=".18"/><stop offset="1" stop-color="#6ec1e4" stop-opacity="0"/></radialGradient>
+<radialGradient id="glowPurple"><stop stop-color="#9c85db" stop-opacity=".42"/><stop offset=".55" stop-color="#9c85db" stop-opacity=".14"/><stop offset="1" stop-color="#9c85db" stop-opacity="0"/></radialGradient>
+<linearGradient id="sh-sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c6e3f4"/><stop offset=".5" stop-color="#d2e9ee"/><stop offset="1" stop-color="#dce0f8"/></linearGradient>
+<g id="folder-sky"><path d="M1 3.5a1.5 1.5 0 0 1 1.5-1.5h3.2l1.6 1.6h6.2A1.5 1.5 0 0 1 15 5.1V12.5A1.5 1.5 0 0 1 13.5 14h-11A1.5 1.5 0 0 1 1 12.5z" fill="#9ec9e8" stroke="#356ba6" stroke-width="1.2"/><path d="M1.5 7.1h13.6l-1.1 5.7a1.4 1.4 0 0 1-1.4 1.2H2.8a1.4 1.4 0 0 1-1.4-1.2z" fill="#d9eefb" stroke="#356ba6" stroke-width="1.2"/></g>
+<g id="cursor"><path d="M0 0v22l5.5-5.5 4.9 9.6 4.3-2.2-4.8-9.1H18.4z" fill="#23242b" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"/></g>
+</defs>
+<g clip-path="url(#stage)">
+<rect x="0.00" y="0.00" width="1280.00" height="820.00" rx="0.00" fill="url(#stageBg)"/>
+<circle cx="150" cy="140" r="360" fill="url(#glowBlue)" opacity=".36"/>
+<circle cx="1150" cy="680" r="400" fill="url(#glowPurple)" opacity=".28"/>
+<g transform="translate(70 34) scale(.919)">
+<rect x="-16.00" y="8.00" width="1272.00" height="774.00" rx="28.00" fill="#2c2233" opacity=".018"/>
+<rect x="-10.00" y="5.00" width="1260.00" height="769.00" rx="22.00" fill="#2c2233" opacity=".026"/>
+<rect x="-5.00" y="2.50" width="1250.00" height="764.00" rx="17.00" fill="#2c2233" opacity=".036"/>
+<rect x="-1.00" y="0.50" width="1242.00" height="761.00" rx="13.00" fill="#2c2233" opacity=".052"/>
+<g clip-path="url(#win)">
+<rect x="0.00" y="0.00" width="1240.00" height="760.00" rx="0.00" fill="url(#sh-sky)"/>
+<circle cx="21" cy="22" r="6" fill="#ff5f57"/><circle cx="41" cy="22" r="6" fill="#febc2e"/><circle cx="61" cy="22" r="6" fill="#28c840"/>
+<g opacity=".74" fill="none" stroke="#2d3f52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="196" y="15" width="16" height="14" rx="3"/><path d="M201.5 15v14"/>
+<path d="M251 22h-12m5-5-5 5 5 5"/>
+<path d="M273 22h12m-5-5 5 5-5 5" opacity=".42"/>
+<path d="M314 18a6 6 0 1 0 1.5 5m-.2-8v4h-4"/>
+</g>
+<rect x="336.00" y="7.00" width="632.00" height="31.00" rx="9.00" fill="#fff" fill-opacity=".54"/>
+<rect x="348.00" y="14.50" width="16.00" height="16.00" rx="4.48" fill="#2864b8" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="356.00" y="26.20" font-size="9.60" fill="#2864b8" font-weight="600" text-anchor="middle">Q</text>
+<text x="372" y="27.2" class="t" font-size="13"><tspan fill="#586e85">工作 /</tspan><tspan fill="#2d3f52" font-weight="500"> Q4 架构评审.md</tspan></text>
+<g class="s btnOn">
+<rect x="980.00" y="7.00" width="30.00" height="30.00" rx="8.00" fill="#fff" fill-opacity=".72" stroke="#000" stroke-opacity=".05"/>
+</g>
+<g class="s btnHover">
+<rect x="980.00" y="7.00" width="30.00" height="30.00" rx="8.00" fill="#000" fill-opacity=".07"/>
+</g>
+<g class="s icUnfold" transform="translate(987 14) scale(.667)" fill="none" stroke="#2d3f52" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" opacity=".82">
+<path d="M16 12h6"/><path d="M8 12H2"/><path d="M12 2v2"/><path d="M12 8v2"/><path d="M12 14v2"/><path d="M12 20v2"/><path d="m19 15 3-3-3-3"/><path d="m5 9-3 3 3 3"/>
+</g>
+<g class="s icFold" transform="translate(987 14) scale(.667)" fill="none" stroke="#245bdb" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 12h6"/><path d="M22 12h-6"/><path d="M12 2v2"/><path d="M12 8v2"/><path d="M12 14v2"/><path d="M12 20v2"/><path d="m19 9-3 3 3 3"/><path d="m5 15 3-3-3-3"/>
+</g>
+<g opacity=".74" fill="none" stroke="#2d3f52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<g transform="translate(1020 14) scale(.667)" stroke-width="2"><path d="M21 12h-8"/><path d="M21 6H8"/><path d="M21 18h-8"/><path d="M3 6v4c0 1.1.9 2 2 2h3"/><path d="M3 10v6c0 1.1.9 2 2 2h3"/></g>
+</g>
+<text class="t" xml:space="preserve" x="1094.00" y="26.50" font-size="12.00" fill="#586e85" font-weight="500" text-anchor="end">326 字</text>
+<g opacity=".74" fill="none" stroke="#2d3f52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1110 16h10m-5 0v12"/>
+<rect x="1138" y="20.5" width="11" height="8.5" rx="2"/><path d="M1140.5 20.5v-2.5a3 3 0 0 1 6 0v2.5"/>
+<path d="M1175 26.5a5.5 5.5 0 1 0-7.5 1.5l-2.5 1 1-2.5"/>
+</g>
+<g fill="#2d3f52" opacity=".74"><circle cx="1201" cy="22" r="1.5"/><circle cx="1207" cy="22" r="1.5"/><circle cx="1213" cy="22" r="1.5"/></g>
+<rect x="10.00" y="50.00" width="65.00" height="47.00" rx="13.00" fill="#000" fill-opacity=".048"/>
+<rect x="32.50" y="63.50" width="20.00" height="20.00" rx="5.60" fill="#7048e8" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="42.50" y="78.10" font-size="12.00" fill="#7048e8" font-weight="600" text-anchor="middle">周</text>
+<rect x="82.50" y="50.00" width="65.00" height="47.00" rx="13.00" fill="#000" fill-opacity=".048"/>
+<rect x="105.00" y="63.50" width="20.00" height="20.00" rx="5.60" fill="#0c8599" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="115.00" y="78.10" font-size="12.00" fill="#0c8599" font-weight="600" text-anchor="middle">路</text>
+<rect x="155.00" y="50.00" width="65.00" height="47.00" rx="13.00" fill="#000" fill-opacity=".048"/>
+<rect x="177.50" y="63.50" width="20.00" height="20.00" rx="5.60" fill="#c74b83" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="187.50" y="78.10" font-size="12.00" fill="#c74b83" font-weight="600" text-anchor="middle">✦</text>
+<text class="t" xml:space="preserve" x="19.00" y="134.00" font-size="15.00" fill="#2864b8" font-weight="600">◈</text>
+<text class="t" xml:space="preserve" x="44.00" y="134.00" font-size="13.00" fill="#586e85" font-weight="600">工作</text>
+<text class="t" xml:space="preserve" x="205.00" y="134.00" font-size="13.00" fill="#586e85" font-weight="600" text-anchor="middle" opacity=".75">•••</text>
+<use href="#folder-sky" x="18" y="164"/>
+<text class="t" xml:space="preserve" x="44.00" y="177.50" font-size="14.00" fill="#2d3f52" font-weight="500">规范</text>
+<rect x="8.00" y="194.00" width="214.00" height="36.00" rx="10.00" fill="#fff" fill-opacity=".76" stroke="#000" stroke-opacity=".045"/>
+<rect x="18.00" y="204.00" width="16.00" height="16.00" rx="4.48" fill="#2864b8" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="26.00" y="215.70" font-size="9.60" fill="#2864b8" font-weight="600" text-anchor="middle">Q</text>
+<text class="t" xml:space="preserve" x="44.00" y="217.50" font-size="14.00" fill="#2d3f52" font-weight="500">Q4 架构评审</text>
+<path d="M18 243h194" stroke="#2d3f52" stroke-opacity=".14" stroke-width="1" stroke-linecap="round"/>
+<rect x="18.00" y="263.00" width="16.00" height="16.00" rx="4.48" fill="#ae3ec9" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="26.00" y="274.70" font-size="9.60" fill="#ae3ec9" font-weight="600" text-anchor="middle">发</text>
+<text class="t" xml:space="preserve" x="44.00" y="276.50" font-size="14.00" fill="#2d3f52" font-weight="400">发布说明</text>
+<rect x="18.00" y="303.00" width="16.00" height="16.00" rx="4.48" fill="#2b8a3e" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="26.00" y="314.70" font-size="9.60" fill="#2b8a3e" font-weight="600" text-anchor="middle">性</text>
+<text class="t" xml:space="preserve" x="44.00" y="316.50" font-size="14.00" fill="#2d3f52" font-weight="400">性能基准</text>
+<rect x="12.00" y="344.00" width="206.00" height="36.00" rx="10.00" fill="none" stroke="#2d3f52" stroke-opacity=".18" stroke-dasharray="4 3"/>
+<text class="t" xml:space="preserve" x="115.00" y="366.50" font-size="13.00" fill="#586e85" font-weight="500" text-anchor="middle">+ 新建文档</text>
+<rect x="230.00" y="46.00" width="1002.00" height="706.00" rx="10.00" fill="#fff" stroke="#000" stroke-opacity=".06"/>
+<g clip-path="url(#card)">
+<g class="s pgStd">
+<g transform="translate(248 112.0)" fill="none" stroke="#8f959e" stroke-width="1.6" stroke-linecap="round"><path d="M16 4H2M12 9.5H2M14 15H2"/></g>
+<rect x="913.00" y="96.00" width="98.00" height="24.00" rx="12.00" fill="#f2f3f5"/>
+<text class="t" xml:space="preserve" x="962.00" y="112.20" font-size="11.50" fill="#646a73" font-weight="600" text-anchor="middle">标准 · 820px</text>
+<text class="t" xml:space="preserve" x="451.00" y="134.00" font-size="30.00" fill="#1f2329" font-weight="600">Q4 架构评审与发布清单</text>
+<text class="t" xml:space="preserve" x="451.00" y="174.00" font-size="14.50" fill="#373c43" font-weight="400">默认标准宽度为 820px 居中排版，适合专注写作；遇到宽表格</text>
+<text class="t" xml:space="preserve" x="451.00" y="198.00" font-size="14.50" fill="#373c43" font-weight="400">或对比清单时，可点右上角「页面宽度」快速切到较宽或全宽。</text>
+<text class="t" xml:space="preserve" x="451.00" y="244.00" font-size="19.00" fill="#1f2329" font-weight="600">模块变更与验收矩阵</text>
+<rect x="451.00" y="262.00" width="560.00" height="168.00" rx="8.00" fill="#fff" stroke="#e2e5ec" stroke-width="1"/>
+<path d="M459.00 262.50 h544.00 a8 8 0 0 1 8 8 v33.50 h-559.00 v-33.50 a8 8 0 0 1 8 -8 z" fill="#f6f7f9"/>
+<line x1="451.00" y1="304.00" x2="1011.00" y2="304.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="451.00" y1="346.00" x2="1011.00" y2="346.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="451.00" y1="388.00" x2="1011.00" y2="388.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="574.20" y1="262.00" x2="574.20" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="764.60" y1="262.00" x2="764.60" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="910.20" y1="262.00" x2="910.20" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<text class="t" xml:space="preserve" x="465.00" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">模块</text>
+<text class="t" xml:space="preserve" x="588.20" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">核心改动</text>
+<text class="t" xml:space="preserve" x="778.60" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">宽度表现</text>
+<text class="t" xml:space="preserve" x="924.20" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">状态</text>
+<text class="m" xml:space="preserve" x="465.00" y="330.00" font-size="12.5" fill="#245bdb">prefs</text>
+<text class="t" xml:space="preserve" x="588.20" y="330.00" font-size="13.00" fill="#1f2329" font-weight="400">新增 full 持久化档位</text>
+<text class="t" xml:space="preserve" x="778.60" y="330.00" font-size="13.00" fill="#1f2329" font-weight="400">四档无缝兼容</text>
+<rect x="922.20" y="314.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="948.20" y="329.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<text class="m" xml:space="preserve" x="465.00" y="372.00" font-size="12.5" fill="#245bdb">editor</text>
+<text class="t" xml:space="preserve" x="588.20" y="372.00" font-size="13.00" fill="#1f2329" font-weight="400">全宽视口与目录避让</text>
+<text class="t" xml:space="preserve" x="778.60" y="372.00" font-size="13.00" fill="#1f2329" font-weight="400">保留 80px 留白</text>
+<rect x="922.20" y="356.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="948.20" y="371.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<text class="m" xml:space="preserve" x="465.00" y="414.00" font-size="12.5" fill="#245bdb">app</text>
+<text class="t" xml:space="preserve" x="588.20" y="414.00" font-size="13.00" fill="#1f2329" font-weight="400">右上角按钮与菜单联动</text>
+<text class="t" xml:space="preserve" x="778.60" y="414.00" font-size="13.00" fill="#1f2329" font-weight="400">⌥⌘P 记忆恢复</text>
+<rect x="922.20" y="398.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="948.20" y="413.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<rect x="451.00" y="454.00" width="560.00" height="56.00" rx="9.00" fill="#f0f6ff" stroke="#cfe0fc" stroke-width="1"/>
+<text class="t" xml:space="preserve" x="469.00" y="487.00" font-size="13.50" fill="#245bdb" font-weight="500">💡  点击右上角「页面宽度」按钮，或按 ⌥⌘P / Ctrl+Alt+P 切换全宽。</text>
+<rect x="451.00" y="530.00" width="560.00" height="92.00" rx="9.00" fill="#f6f7f9" stroke="#e5e8ef" stroke-width="1"/>
+<text class="m" xml:space="preserve" x="983.00" y="552.00" font-size="12" fill="#8f959e">go</text>
+<text class="m" xml:space="preserve" x="469.00" y="568.00" font-size="12.5" fill="#1f2329"><tspan fill="#9c36b5">func</tspan> (p *Prefs) <tspan fill="#245bdb">FullWidth</tspan>() <tspan fill="#0c8599">bool</tspan> { <tspan fill="#9c36b5">return</tspan> p.Page == <tspan fill="#2b8a3e">"full"</tspan> }</text>
+<text class="m" xml:space="preserve" x="469.00" y="594.00" font-size="12.5" fill="#646a73">// Keeps 80px left gutter for block handles.</text>
+</g>
+<g class="s pgWide">
+<g transform="translate(248 112.0)" fill="none" stroke="#8f959e" stroke-width="1.6" stroke-linecap="round"><path d="M16 4H2M12 9.5H2M14 15H2"/></g>
+<rect x="987.00" y="96.00" width="104.00" height="24.00" rx="12.00" fill="#eef5ff"/>
+<text class="t" xml:space="preserve" x="1039.00" y="112.20" font-size="11.50" fill="#2864b8" font-weight="600" text-anchor="middle">较宽 · 1040px</text>
+<text class="t" xml:space="preserve" x="371.00" y="134.00" font-size="30.00" fill="#1f2329" font-weight="600">Q4 架构评审与发布清单</text>
+<text class="t" xml:space="preserve" x="371.00" y="174.00" font-size="14.50" fill="#373c43" font-weight="400">较宽模式将正文列扩展至 1040px，兼顾舒适阅读行长与宽表格展示空间；</text>
+<text class="t" xml:space="preserve" x="371.00" y="198.00" font-size="14.50" fill="#373c43" font-weight="400">需要更大视野时，可在右上角一键切换至铺满视口的全宽模式。</text>
+<text class="t" xml:space="preserve" x="371.00" y="244.00" font-size="19.00" fill="#1f2329" font-weight="600">模块变更与验收矩阵</text>
+<rect x="371.00" y="262.00" width="720.00" height="168.00" rx="8.00" fill="#fff" stroke="#e2e5ec" stroke-width="1"/>
+<path d="M379.00 262.50 h704.00 a8 8 0 0 1 8 8 v33.50 h-719.00 v-33.50 a8 8 0 0 1 8 -8 z" fill="#f6f7f9"/>
+<line x1="371.00" y1="304.00" x2="1091.00" y2="304.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="371.00" y1="346.00" x2="1091.00" y2="346.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="371.00" y1="388.00" x2="1091.00" y2="388.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="529.40" y1="262.00" x2="529.40" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="774.20" y1="262.00" x2="774.20" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="961.40" y1="262.00" x2="961.40" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<text class="t" xml:space="preserve" x="385.00" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">模块</text>
+<text class="t" xml:space="preserve" x="543.40" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">核心改动</text>
+<text class="t" xml:space="preserve" x="788.20" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">宽度表现</text>
+<text class="t" xml:space="preserve" x="975.40" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">状态</text>
+<text class="m" xml:space="preserve" x="385.00" y="330.00" font-size="12.5" fill="#245bdb">internal/prefs</text>
+<text class="t" xml:space="preserve" x="543.40" y="330.00" font-size="13.00" fill="#1f2329" font-weight="400">新增 full 全宽持久化档位</text>
+<text class="t" xml:space="preserve" x="788.20" y="330.00" font-size="13.00" fill="#1f2329" font-weight="400">窄 / 标准 / 宽 / 全宽</text>
+<rect x="973.40" y="314.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="999.40" y="329.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<text class="m" xml:space="preserve" x="385.00" y="372.00" font-size="12.5" fill="#245bdb">internal/editor</text>
+<text class="t" xml:space="preserve" x="543.40" y="372.00" font-size="13.00" fill="#1f2329" font-weight="400">全宽铺满、目录避让与表格对齐</text>
+<text class="t" xml:space="preserve" x="788.20" y="372.00" font-size="13.00" fill="#1f2329" font-weight="400">保留左侧 80px 安全留白</text>
+<rect x="973.40" y="356.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="999.40" y="371.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<text class="m" xml:space="preserve" x="385.00" y="414.00" font-size="12.5" fill="#245bdb">internal/app</text>
+<text class="t" xml:space="preserve" x="543.40" y="414.00" font-size="13.00" fill="#1f2329" font-weight="400">右上角按钮、更多菜单与命令栏</text>
+<text class="t" xml:space="preserve" x="788.20" y="414.00" font-size="13.00" fill="#1f2329" font-weight="400">⌥⌘P / Ctrl+Alt+P 记忆恢复</text>
+<rect x="973.40" y="398.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="999.40" y="413.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<rect x="371.00" y="454.00" width="720.00" height="56.00" rx="9.00" fill="#f0f6ff" stroke="#cfe0fc" stroke-width="1"/>
+<text class="t" xml:space="preserve" x="389.00" y="487.00" font-size="13.50" fill="#245bdb" font-weight="500">💡  较宽模式适合大屏日常写作；按 ⌥⌘P / Ctrl+Alt+P 可随时在当前宽度与全宽之间往返。</text>
+<rect x="371.00" y="530.00" width="720.00" height="92.00" rx="9.00" fill="#f6f7f9" stroke="#e5e8ef" stroke-width="1"/>
+<text class="m" xml:space="preserve" x="1063.00" y="552.00" font-size="12" fill="#8f959e">go</text>
+<text class="m" xml:space="preserve" x="389.00" y="568.00" font-size="12.5" fill="#1f2329"><tspan fill="#9c36b5">func</tspan> (p *Prefs) <tspan fill="#245bdb">FullWidth</tspan>() <tspan fill="#0c8599">bool</tspan> { <tspan fill="#9c36b5">return</tspan> p.Page == <tspan fill="#2b8a3e">"full"</tspan> }</text>
+<text class="m" xml:space="preserve" x="389.00" y="594.00" font-size="12.5" fill="#646a73">// FullWidth spans the editor viewport while keeping 80px left gutter for block handles.</text>
+</g>
+<g class="s pgFull">
+<g transform="translate(248 62.0)" fill="none" stroke="#8f959e" stroke-width="1.6" stroke-linecap="round"><path d="M16 4H2M12 9.5H2M14 15H2"/></g>
+<g transform="translate(258.0 118)" opacity=".55" fill="none" stroke="#8f959e" stroke-width="1.6" stroke-linecap="round"><path d="M5 10h10M10 5v10"/><g fill="#8f959e" stroke="none"><circle cx="27" cy="6" r="1.2"/><circle cx="27" cy="10" r="1.2"/><circle cx="27" cy="14" r="1.2"/><circle cx="32" cy="6" r="1.2"/><circle cx="32" cy="10" r="1.2"/><circle cx="32" cy="14" r="1.2"/></g></g>
+<rect x="1074.00" y="96.00" width="122.00" height="24.00" rx="12.00" fill="#e8f2ff"/>
+<text class="t" xml:space="preserve" x="1135.00" y="112.20" font-size="11.50" fill="#245bdb" font-weight="600" text-anchor="middle">全宽 · Full Width</text>
+<text class="t" xml:space="preserve" x="306.00" y="134.00" font-size="30.00" fill="#1f2329" font-weight="600">Q4 架构评审与发布清单</text>
+<text class="t" xml:space="preserve" x="306.00" y="174.00" font-size="14.50" fill="#373c43" font-weight="400">开启全宽模式后，正文、宽表格、长代码块与多栏布局自动铺满整个编辑视口，同时保留左侧 80px 块操作</text>
+<text class="t" xml:space="preserve" x="306.00" y="198.00" font-size="14.50" fill="#373c43" font-weight="400">安全留白与右侧边距，目录展开或收起时平滑避让，阅读密集技术文档更舒展。</text>
+<text class="t" xml:space="preserve" x="306.00" y="244.00" font-size="19.00" fill="#1f2329" font-weight="600">模块变更与验收矩阵</text>
+<rect x="306.00" y="262.00" width="890.00" height="168.00" rx="8.00" fill="#fff" stroke="#e2e5ec" stroke-width="1"/>
+<path d="M314.00 262.50 h874.00 a8 8 0 0 1 8 8 v33.50 h-889.00 v-33.50 a8 8 0 0 1 8 -8 z" fill="#f6f7f9"/>
+<line x1="306.00" y1="304.00" x2="1196.00" y2="304.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="306.00" y1="346.00" x2="1196.00" y2="346.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="306.00" y1="388.00" x2="1196.00" y2="388.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="501.80" y1="262.00" x2="501.80" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="804.40" y1="262.00" x2="804.40" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<line x1="1035.80" y1="262.00" x2="1035.80" y2="430.00" stroke="#e8ebf0" stroke-width="1"/>
+<text class="t" xml:space="preserve" x="320.00" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">模块</text>
+<text class="t" xml:space="preserve" x="515.80" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">核心改动</text>
+<text class="t" xml:space="preserve" x="818.40" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">宽度表现</text>
+<text class="t" xml:space="preserve" x="1049.80" y="288.00" font-size="13.00" fill="#4e5969" font-weight="600">状态</text>
+<text class="m" xml:space="preserve" x="320.00" y="330.00" font-size="12.5" fill="#245bdb">internal/prefs</text>
+<text class="t" xml:space="preserve" x="515.80" y="330.00" font-size="13.00" fill="#1f2329" font-weight="400">新增 full 全宽持久化档位</text>
+<text class="t" xml:space="preserve" x="818.40" y="330.00" font-size="13.00" fill="#1f2329" font-weight="400">窄 / 标准 / 宽 / 全宽</text>
+<rect x="1047.80" y="314.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="1073.80" y="329.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<text class="m" xml:space="preserve" x="320.00" y="372.00" font-size="12.5" fill="#245bdb">internal/editor</text>
+<text class="t" xml:space="preserve" x="515.80" y="372.00" font-size="13.00" fill="#1f2329" font-weight="400">全宽铺满、目录避让与表格对齐</text>
+<text class="t" xml:space="preserve" x="818.40" y="372.00" font-size="13.00" fill="#1f2329" font-weight="400">保留左侧 80px 安全留白</text>
+<rect x="1047.80" y="356.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="1073.80" y="371.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<text class="m" xml:space="preserve" x="320.00" y="414.00" font-size="12.5" fill="#245bdb">internal/app</text>
+<text class="t" xml:space="preserve" x="515.80" y="414.00" font-size="13.00" fill="#1f2329" font-weight="400">右上角按钮、更多菜单与命令栏</text>
+<text class="t" xml:space="preserve" x="818.40" y="414.00" font-size="13.00" fill="#1f2329" font-weight="400">⌥⌘P / Ctrl+Alt+P 记忆恢复</text>
+<rect x="1047.80" y="398.00" width="52.00" height="22.00" rx="11.00" fill="#e8f8ee"/>
+<text class="t" xml:space="preserve" x="1073.80" y="413.00" font-size="11.50" fill="#1f883d" font-weight="600" text-anchor="middle">已通过</text>
+<rect x="306.00" y="454.00" width="890.00" height="56.00" rx="9.00" fill="#f0f6ff" stroke="#cfe0fc" stroke-width="1"/>
+<text class="t" xml:space="preserve" x="324.00" y="487.00" font-size="13.50" fill="#245bdb" font-weight="500">💡  全宽模式同时支持主窗口、分屏、独立文档窗口与专注模式，白板 / PDF / 导出预览自动隔离。</text>
+<rect x="306.00" y="530.00" width="890.00" height="92.00" rx="9.00" fill="#f6f7f9" stroke="#e5e8ef" stroke-width="1"/>
+<text class="m" xml:space="preserve" x="1168.00" y="552.00" font-size="12" fill="#8f959e">go</text>
+<text class="m" xml:space="preserve" x="324.00" y="568.00" font-size="12.5" fill="#1f2329"><tspan fill="#9c36b5">func</tspan> (p *Prefs) <tspan fill="#245bdb">FullWidth</tspan>() <tspan fill="#0c8599">bool</tspan> { <tspan fill="#9c36b5">return</tspan> p.Page == <tspan fill="#2b8a3e">"full"</tspan> }</text>
+<text class="m" xml:space="preserve" x="324.00" y="594.00" font-size="12.5" fill="#646a73">// FullWidth spans the editor viewport while keeping 80px left gutter for block handles.</text>
+</g>
+</g>
+<g class="s pop1">
+<rect x="922.00" y="45.00" width="172.00" height="132.00" rx="12.00" fill="#1c2a3a" opacity=".10"/>
+<rect x="924.00" y="42.00" width="168.00" height="128.00" rx="10.00" fill="#fff" stroke="#000" stroke-opacity=".08"/>
+<text class="t" xml:space="preserve" x="958.00" y="66.00" font-size="13.00" fill="#1f2329" font-weight="500">窄</text>
+<path d="M939.0 91.0 l3.2 3.2 6.2-6.2" fill="none" stroke="#245bdb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="t" xml:space="preserve" x="958.00" y="95.00" font-size="13.00" fill="#245bdb" font-weight="500">标准</text>
+<g class="s rowWideHi">
+<rect x="929.00" y="106.00" width="158.00" height="27.00" rx="6.00" fill="#245bdb" fill-opacity=".12"/>
+</g>
+<text class="t" xml:space="preserve" x="958.00" y="124.00" font-size="13.00" fill="#1f2329" font-weight="500">较宽</text>
+<text class="t" xml:space="preserve" x="958.00" y="153.00" font-size="13.00" fill="#1f2329" font-weight="500">全宽</text>
+<text class="t" xml:space="preserve" x="1078.00" y="153.00" font-size="11.50" fill="#8f959e" font-weight="500" text-anchor="end">⌥⌘P</text>
+</g>
+<g class="s pop2">
+<rect x="922.00" y="45.00" width="172.00" height="132.00" rx="12.00" fill="#1c2a3a" opacity=".10"/>
+<rect x="924.00" y="42.00" width="168.00" height="128.00" rx="10.00" fill="#fff" stroke="#000" stroke-opacity=".08"/>
+<text class="t" xml:space="preserve" x="958.00" y="66.00" font-size="13.00" fill="#1f2329" font-weight="500">窄</text>
+<text class="t" xml:space="preserve" x="958.00" y="95.00" font-size="13.00" fill="#1f2329" font-weight="500">标准</text>
+<path d="M939.0 120.0 l3.2 3.2 6.2-6.2" fill="none" stroke="#245bdb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="t" xml:space="preserve" x="958.00" y="124.00" font-size="13.00" fill="#245bdb" font-weight="500">较宽</text>
+<g class="s rowFullHi">
+<rect x="929.00" y="135.00" width="158.00" height="27.00" rx="6.00" fill="#245bdb" fill-opacity=".12"/>
+</g>
+<text class="t" xml:space="preserve" x="958.00" y="153.00" font-size="13.00" fill="#1f2329" font-weight="500">全宽</text>
+<text class="t" xml:space="preserve" x="1078.00" y="153.00" font-size="11.50" fill="#8f959e" font-weight="500" text-anchor="end">⌥⌘P</text>
+</g>
+<g class="s hudKey">
+<rect x="605.00" y="668.00" width="252.00" height="36.00" rx="10.00" fill="#1f2329" fill-opacity=".88"/>
+<text class="t" xml:space="preserve" x="731.00" y="691.00" font-size="13.50" fill="#fff" font-weight="600" text-anchor="middle">⌥⌘P  /  Ctrl+Alt+P · 恢复较宽</text>
+</g>
+<g class="s ptr"><use href="#cursor"/></g>
+</g></g>
+<g class="s cap0">
+<circle cx="122.0" cy="784" r="4" fill="#2864b8"/>
+<text class="t" xml:space="preserve" x="136.00" y="789.00" font-size="14.00" fill="#2d3f52" font-weight="500">1. 点击右上角「页面宽度」按钮</text>
+</g>
+<g class="s cap1">
+<circle cx="494.0" cy="784" r="4" fill="#2864b8"/>
+<text class="t" xml:space="preserve" x="508.00" y="789.00" font-size="14.00" fill="#2d3f52" font-weight="500">2. 切换较宽 / 全宽，铺满宽表格与正文</text>
+</g>
+<g class="s cap2">
+<circle cx="904.0" cy="784" r="4" fill="#2864b8"/>
+<text class="t" xml:space="preserve" x="918.00" y="789.00" font-size="14.00" fill="#2d3f52" font-weight="500">3. ⌥⌘P / Ctrl+Alt+P 切换并记忆原宽</text>
+</g>
+</g></svg>
