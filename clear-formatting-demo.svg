@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 820" width="1280" height="820" role="img" aria-label="ArcMD 清除样式功能演示动图：拖选网页粘贴过来的带颜色和链接文本，点击悬浮格式栏 T× 按钮一键清除；通过正文右键菜单清除行内代码、按键、手绘标注与链接；多块选中后按 Shift+Command+\（Windows 为 Ctrl+Shift+\）批量清除样式，同时完整保留标题与表格结构。">
+<style>
+.t{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",Helvetica,Arial,sans-serif}
+.m{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace}
+.s{animation-duration:15s;animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:cubic-bezier(.65,0,.35,1)}
+
+@keyframes sel1{0%,6%{opacity:0}9%,24%{opacity:1}26%,100%{opacity:0}}.sel1{animation-name:sel1}
+@keyframes selBar{0%,8%{opacity:0;transform:translateY(4px) scale(.97)}11%,24%{opacity:1;transform:none}26%,100%{opacity:0;transform:translateY(4px) scale(.97)}}.selBar{animation-name:selBar;transform-box:fill-box;transform-origin:bottom center}
+@keyframes btnClearHi{0%,15%{opacity:0}17%,24%{opacity:1}26%,100%{opacity:0}}.btnClearHi{animation-name:btnClearHi}
+@keyframes tipClear{0%,16%{opacity:0;transform:translateY(3px)}18%,24%{opacity:1;transform:none}26%,100%{opacity:0;transform:translateY(3px)}}.tipClear{animation-name:tipClear}
+@keyframes p1Styled{0%,24%{opacity:1}26%,94%{opacity:0}97%,100%{opacity:1}}.p1Styled{animation-name:p1Styled}
+@keyframes p1Clean{0%,24%{opacity:0}26%,94%{opacity:1}97%,100%{opacity:0}}.p1Clean{animation-name:p1Clean}
+
+@keyframes sel2{0%,35%{opacity:0}38%,58%{opacity:1}60%,100%{opacity:0}}.sel2{animation-name:sel2}
+@keyframes ctxMenu{0%,41%{opacity:0;transform:translateY(-4px) scale(.97)}44%,58%{opacity:1;transform:none}60%,100%{opacity:0;transform:translateY(-4px) scale(.97)}}.ctxMenu{animation-name:ctxMenu;transform-box:fill-box;transform-origin:top left}
+@keyframes ctxClearHi{0%,49%{opacity:0}51%,58%{opacity:1}60%,100%{opacity:0}}.ctxClearHi{animation-name:ctxClearHi}
+@keyframes p2Styled{0%,58%{opacity:1}60%,94%{opacity:0}97%,100%{opacity:1}}.p2Styled{animation-name:p2Styled}
+@keyframes p2Clean{0%,58%{opacity:0}60%,94%{opacity:1}97%,100%{opacity:0}}.p2Clean{animation-name:p2Clean}
+
+@keyframes blkSel{0%,68%{opacity:0}71%,92%{opacity:1}95%,100%{opacity:0}}.blkSel{animation-name:blkSel}
+@keyframes hudKey{0%,74%{opacity:0;transform:translateY(8px)}77%,89%{opacity:1;transform:none}92%,100%{opacity:0;transform:translateY(8px)}}.hudKey{animation-name:hudKey}
+@keyframes blkStyled{0%,80%{opacity:1}82%,94%{opacity:0}97%,100%{opacity:1}}.blkStyled{animation-name:blkStyled}
+@keyframes blkClean{0%,80%{opacity:0}82%,94%{opacity:1}97%,100%{opacity:0}}.blkClean{animation-name:blkClean}
+
+@keyframes ptr{
+  0%,5%{opacity:0;transform:translate(520px,230px)}
+  8%{opacity:1;transform:translate(556px,194px)}
+  12%{opacity:1;transform:translate(672px,194px)}
+  17%,24%{opacity:1;transform:translate(812px,154px)}
+  30%,35%{opacity:1;transform:translate(620px,266px)}
+  40%,44%{opacity:1;transform:translate(682px,278px)}
+  51%,58%{opacity:1;transform:translate(756px,506px)}
+  64%,69%{opacity:1;transform:translate(460px,368px)}
+  74%,100%{opacity:0;transform:translate(460px,368px)}
+}.ptr{animation-name:ptr}
+
+@keyframes cap0{0%,33%{opacity:1}36%,94%{opacity:.38}97%,100%{opacity:1}}.cap0{animation-name:cap0}
+@keyframes cap1{0%,33%{opacity:.38}36%,67%{opacity:1}70%,100%{opacity:.38}}.cap1{animation-name:cap1}
+@keyframes cap2{0%,67%{opacity:.38}70%,94%{opacity:1}97%,100%{opacity:.38}}.cap2{animation-name:cap2}
+
+@media(prefers-reduced-motion:reduce){
+  .s{animation:none!important}
+  .ptr,.ctxMenu,.ctxClearHi,.sel2,.blkSel,.hudKey,.p1Clean,.p2Clean,.blkClean{display:none}
+  .p1Styled,.p2Styled,.blkStyled,.sel1,.selBar,.btnClearHi,.tipClear,.cap0,.cap1,.cap2{opacity:1!important;transform:none!important}
+}
+</style>
+<defs>
+<clipPath id="stage"><rect width="1280" height="820" rx="28"/></clipPath>
+<clipPath id="win"><rect width="1240" height="760" rx="12"/></clipPath>
+<clipPath id="card"><rect x="230" y="46" width="1002" height="706" rx="10"/></clipPath>
+<linearGradient id="stageBg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fafe"/><stop offset=".52" stop-color="#f5f7fc"/><stop offset="1" stop-color="#eef5fd"/></linearGradient>
+<radialGradient id="glowBlue"><stop stop-color="#6ec1e4" stop-opacity=".5"/><stop offset=".55" stop-color="#6ec1e4" stop-opacity=".18"/><stop offset="1" stop-color="#6ec1e4" stop-opacity="0"/></radialGradient>
+<radialGradient id="glowPurple"><stop stop-color="#9c85db" stop-opacity=".42"/><stop offset=".55" stop-color="#9c85db" stop-opacity=".14"/><stop offset="1" stop-color="#9c85db" stop-opacity="0"/></radialGradient>
+<linearGradient id="sh-sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#c6e3f4"/><stop offset=".5" stop-color="#d2e9ee"/><stop offset="1" stop-color="#dce0f8"/></linearGradient>
+<g id="folder-sky"><path d="M1 3.5a1.5 1.5 0 0 1 1.5-1.5h3.2l1.6 1.6h6.2A1.5 1.5 0 0 1 15 5.1V12.5A1.5 1.5 0 0 1 13.5 14h-11A1.5 1.5 0 0 1 1 12.5z" fill="#9ec9e8" stroke="#356ba6" stroke-width="1.2"/><path d="M1.5 7.1h13.6l-1.1 5.7a1.4 1.4 0 0 1-1.4 1.2H2.8a1.4 1.4 0 0 1-1.4-1.2z" fill="#d9eefb" stroke="#356ba6" stroke-width="1.2"/></g>
+<g id="cursor"><path d="M0 0v22l5.5-5.5 4.9 9.6 4.3-2.2-4.8-9.1H18.4z" fill="#23242b" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"/></g>
+</defs>
+
+<g clip-path="url(#stage)">
+<rect x="0" y="0" width="1280" height="820" fill="url(#stageBg)"/>
+<circle cx="150" cy="140" r="360" fill="url(#glowBlue)" opacity=".36"/>
+<circle cx="1150" cy="680" r="400" fill="url(#glowPurple)" opacity=".28"/>
+
+<g transform="translate(70 34) scale(.919)">
+<rect x="-16" y="8" width="1272" height="774" rx="28" fill="#2c2233" opacity=".018"/>
+<rect x="-10" y="5" width="1260" height="769" rx="22" fill="#2c2233" opacity=".026"/>
+<rect x="-5" y="2.5" width="1250" height="764" rx="17" fill="#2c2233" opacity=".036"/>
+<rect x="-1" y="0.5" width="1242" height="761" rx="13" fill="#2c2233" opacity=".052"/>
+
+<g clip-path="url(#win)">
+<rect x="0" y="0" width="1240" height="760" fill="url(#sh-sky)"/>
+<circle cx="21" cy="22" r="6" fill="#ff5f57"/><circle cx="41" cy="22" r="6" fill="#febc2e"/><circle cx="61" cy="22" r="6" fill="#28c840"/>
+<g opacity=".74" fill="none" stroke="#2d3f52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<rect x="196" y="15" width="16" height="14" rx="3"/><path d="M201.5 15v14"/>
+<path d="M251 22h-12m5-5-5 5 5 5"/>
+<path d="M273 22h12m-5-5 5 5-5 5" opacity=".42"/>
+<path d="M314 18a6 6 0 1 0 1.5 5m-.2-8v4h-4"/>
+</g>
+<rect x="336" y="7" width="632" height="31" rx="9" fill="#fff" fill-opacity=".54"/>
+<rect x="348" y="14.5" width="16" height="16" rx="4.48" fill="#2864b8" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="356" y="26.2" font-size="9.6" fill="#2864b8" font-weight="600" text-anchor="middle">产</text>
+<text x="372" y="27.2" class="t" font-size="13"><tspan fill="#586e85">工作 /</tspan><tspan fill="#2d3f52" font-weight="500"> 产品评审纪要.md</tspan></text>
+<text class="t" xml:space="preserve" x="1094" y="26.5" font-size="12" fill="#586e85" font-weight="500" text-anchor="end">218 字</text>
+<g opacity=".74" fill="none" stroke="#2d3f52" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1110 16h10m-5 0v12"/>
+<rect x="1138" y="20.5" width="11" height="8.5" rx="2"/><path d="M1140.5 20.5v-2.5a3 3 0 0 1 6 0v2.5"/>
+<path d="M1175 26.5a5.5 5.5 0 1 0-7.5 1.5l-2.5 1 1-2.5"/>
+</g>
+<g fill="#2d3f52" opacity=".74"><circle cx="1201" cy="22" r="1.5"/><circle cx="1207" cy="22" r="1.5"/><circle cx="1213" cy="22" r="1.5"/></g>
+
+<!-- Sidebar -->
+<rect x="10" y="50" width="65" height="47" rx="13" fill="#000" fill-opacity=".048"/>
+<rect x="32.5" y="63.5" width="20" height="20" rx="5.6" fill="#7048e8" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="42.5" y="78.1" font-size="12" fill="#7048e8" font-weight="600" text-anchor="middle">周</text>
+<rect x="82.5" y="50" width="65" height="47" rx="13" fill="#000" fill-opacity=".048"/>
+<rect x="105" y="63.5" width="20" height="20" rx="5.6" fill="#0c8599" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="115" y="78.1" font-size="12" fill="#0c8599" font-weight="600" text-anchor="middle">路</text>
+<rect x="155" y="50" width="65" height="47" rx="13" fill="#000" fill-opacity=".048"/>
+<rect x="177.5" y="63.5" width="20" height="20" rx="5.6" fill="#c74b83" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="187.5" y="78.1" font-size="12" fill="#c74b83" font-weight="600" text-anchor="middle">✦</text>
+
+<text class="t" xml:space="preserve" x="19" y="134" font-size="15" fill="#2864b8" font-weight="600">◈</text>
+<text class="t" xml:space="preserve" x="44" y="134" font-size="13" fill="#586e85" font-weight="600">工作</text>
+<text class="t" xml:space="preserve" x="205" y="134" font-size="13" fill="#586e85" font-weight="600" text-anchor="middle" opacity=".75">•••</text>
+
+<use href="#folder-sky" x="18" y="164"/>
+<text class="t" xml:space="preserve" x="44" y="177.5" font-size="14" fill="#2d3f52" font-weight="500">规范</text>
+<rect x="8" y="194" width="214" height="36" rx="10" fill="#fff" fill-opacity=".76" stroke="#000" stroke-opacity=".045"/>
+<rect x="18" y="204" width="16" height="16" rx="4.48" fill="#2864b8" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="26" y="215.7" font-size="9.6" fill="#2864b8" font-weight="600" text-anchor="middle">产</text>
+<text class="t" xml:space="preserve" x="44" y="217.5" font-size="14" fill="#2d3f52" font-weight="500">产品评审纪要</text>
+<path d="M18 243h194" stroke="#2d3f52" stroke-opacity=".14" stroke-width="1" stroke-linecap="round"/>
+<rect x="18" y="263" width="16" height="16" rx="4.48" fill="#ae3ec9" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="26" y="274.7" font-size="9.6" fill="#ae3ec9" font-weight="600" text-anchor="middle">发</text>
+<text class="t" xml:space="preserve" x="44" y="276.5" font-size="14" fill="#2d3f52" font-weight="400">发布说明</text>
+<rect x="18" y="303" width="16" height="16" rx="4.48" fill="#2b8a3e" fill-opacity=".16"/>
+<text class="t" xml:space="preserve" x="26" y="314.7" font-size="9.6" fill="#2b8a3e" font-weight="600" text-anchor="middle">会</text>
+<text class="t" xml:space="preserve" x="44" y="316.5" font-size="14" fill="#2d3f52" font-weight="400">会议模板</text>
+<rect x="12" y="344" width="206" height="36" rx="10" fill="none" stroke="#2d3f52" stroke-opacity=".18" stroke-dasharray="4 3"/>
+<text class="t" xml:space="preserve" x="115" y="366.5" font-size="13" fill="#586e85" font-weight="500" text-anchor="middle">+ 新建文档</text>
+
+<!-- Document Card -->
+<rect x="230" y="46" width="1002" height="706" rx="10" fill="#fff" stroke="#000" stroke-opacity=".06"/>
+<g clip-path="url(#card)">
+<g transform="translate(248 64)" fill="none" stroke="#8f959e" stroke-width="1.6" stroke-linecap="round"><path d="M16 4H2M12 9.5H2M14 15H2"/></g>
+
+<!-- H1 Title -->
+<text class="t" xml:space="preserve" x="370" y="108" font-size="29" fill="#1f2329" font-weight="600">产品评审纪要</text>
+
+<!-- Paragraph 1: Pasted HTML colored text -> cleared via selection bar T× -->
+<text class="t" xml:space="preserve" x="370" y="204" font-size="15" fill="#373c43">从网页粘贴的段落保留了</text>
+<g class="s p1Styled">
+  <rect x="540" y="186" width="134" height="25" rx="4" fill="#fef08a"/>
+  <text class="t" xml:space="preserve" x="546" y="204" font-size="15" fill="#e11d48" font-weight="700" font-style="italic">红字黄底加粗链接</text>
+  <line x1="546" y1="207.5" x2="668" y2="207.5" stroke="#e11d48" stroke-width="1.3"/>
+</g>
+<g class="s p1Clean">
+  <text class="t" xml:space="preserve" x="546" y="204" font-size="15" fill="#1f2329" font-weight="400">红字黄底加粗链接</text>
+</g>
+<g class="s sel1">
+  <rect x="540" y="185" width="134" height="27" rx="3" fill="#3b82f6" fill-opacity=".24"/>
+</g>
+<text class="t" xml:space="preserve" x="679" y="204" font-size="15" fill="#373c43">与外部颜色，选中即可一键清除。</text>
+<text class="t" xml:space="preserve" x="370" y="232" font-size="14" fill="#646a73">在折叠光标处执行清除样式还会重置后续输入状态，打字不再被颜色或加粗黏住。</text>
+
+<!-- Paragraph 2: Mixed inline styles + hand-drawn annotation + link -> cleared via right-click menu -->
+<text class="t" xml:space="preserve" x="370" y="286" font-size="15" fill="#373c43">混合行内样式：</text>
+<g class="s p2Styled">
+  <rect x="478" y="268" width="90" height="24" rx="5" fill="#f2f3f5" stroke="#e5e7eb"/>
+  <text class="m" xml:space="preserve" x="523" y="284.5" font-size="12.5" fill="#d9480f" text-anchor="middle">inline code</text>
+  <text class="t" xml:space="preserve" x="574" y="286" font-size="15" fill="#373c43">、</text>
+  <rect x="592" y="268" width="42" height="23" rx="5" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="593" y="289" width="40" height="2.5" rx="1" fill="#cbd5e1"/>
+  <text class="m" xml:space="preserve" x="613" y="284" font-size="12" fill="#1f2329" font-weight="600" text-anchor="middle">Ctrl</text>
+  <text class="t" xml:space="preserve" x="640" y="286" font-size="15" fill="#373c43">、</text>
+  <text class="t" xml:space="preserve" x="658" y="286" font-size="15" fill="#1f2329" font-weight="500">手绘波浪标注</text>
+  <path d="M658 291 q4.5 -3.2 9 0 t9 0 t9 0 t9 0 t9 0 t9 0 t9 0 t9 0 t9 0 t9 0" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+  <text class="t" xml:space="preserve" x="754" y="286" font-size="15" fill="#373c43">与</text>
+  <text class="t" xml:space="preserve" x="774" y="286" font-size="15" fill="#245bdb" text-decoration="underline">参考链接</text>
+</g>
+<g class="s p2Clean">
+  <text class="t" xml:space="preserve" x="478" y="286" font-size="15" fill="#1f2329">inline code、Ctrl、手绘波浪标注 与 参考链接</text>
+</g>
+<g class="s sel2">
+  <rect x="476" y="266" width="364" height="28" rx="3" fill="#3b82f6" fill-opacity=".22"/>
+</g>
+
+<!-- Multi-block selection highlights (H2 + Table) -->
+<g class="s blkSel">
+  <rect x="358" y="334" width="744" height="44" rx="8" fill="#245bdb" fill-opacity=".07" stroke="#245bdb" stroke-opacity=".42" stroke-width="1.5"/>
+  <rect x="358" y="392" width="744" height="178" rx="8" fill="#245bdb" fill-opacity=".07" stroke="#245bdb" stroke-opacity=".42" stroke-width="1.5"/>
+</g>
+
+<!-- H2 Heading -->
+<g class="s blkStyled">
+  <text class="t" xml:space="preserve" x="370" y="364" font-size="21" fill="#dc2626" font-weight="700">多块内容与表格样式</text>
+  <line x1="370" y1="368.5" x2="559" y2="368.5" stroke="#dc2626" stroke-width="1.6"/>
+</g>
+<g class="s blkClean">
+  <text class="t" xml:space="preserve" x="370" y="364" font-size="21" fill="#1f2329" font-weight="600">多块内容与表格样式</text>
+</g>
+
+<!-- Table -->
+<rect x="370" y="400" width="720" height="160" rx="8" fill="#fff" stroke="#e2e5ec" stroke-width="1"/>
+<path d="M378 400.5 h704 a8 8 0 0 1 8 8 v33.5 h-719 v-33.5 a8 8 0 0 1 8 -8 z" fill="#f6f7f9"/>
+<line x1="370" y1="442" x2="1090" y2="442" stroke="#e8ebf0"/>
+<line x1="370" y1="500" x2="1090" y2="500" stroke="#e8ebf0"/>
+<line x1="530" y1="400" x2="530" y2="560" stroke="#e8ebf0"/>
+<line x1="840" y1="400" x2="840" y2="560" stroke="#e8ebf0"/>
+<text class="t" xml:space="preserve" x="386" y="426" font-size="13" fill="#4e5969" font-weight="600">模块</text>
+<text class="t" xml:space="preserve" x="546" y="426" font-size="13" fill="#4e5969" font-weight="600">单元格样式文本</text>
+<text class="t" xml:space="preserve" x="856" y="426" font-size="13" fill="#4e5969" font-weight="600">清除效果</text>
+
+<text class="m" xml:space="preserve" x="386" y="476" font-size="13" fill="#245bdb">internal/editor</text>
+<g class="s blkStyled">
+  <rect x="544" y="458" width="128" height="25" rx="4" fill="#fef08a"/>
+  <text class="t" xml:space="preserve" x="551" y="476" font-size="14" fill="#1d4ed8" font-weight="700">蓝字黄底单元格</text>
+</g>
+<g class="s blkClean">
+  <text class="t" xml:space="preserve" x="551" y="476" font-size="14" fill="#1f2329">蓝字黄底单元格</text>
+</g>
+<text class="t" xml:space="preserve" x="856" y="476" font-size="13.5" fill="#4e5969">保留表格与标题结构</text>
+
+<text class="m" xml:space="preserve" x="386" y="535" font-size="13" fill="#245bdb">internal/document</text>
+<g class="s blkStyled">
+  <text class="t" xml:space="preserve" x="546" y="535" font-size="14" fill="#245bdb" font-style="italic" text-decoration="underline">https://example.com</text>
+</g>
+<g class="s blkClean">
+  <text class="t" xml:space="preserve" x="546" y="535" font-size="14" fill="#1f2329">https://example.com</text>
+</g>
+<text class="t" xml:space="preserve" x="856" y="535" font-size="13.5" fill="#4e5969">支持单步 ⌘Z 完整撤销</text>
+
+<!-- Tip callout -->
+<rect x="370" y="592" width="720" height="50" rx="9" fill="#f0f6ff" stroke="#cfe0fc"/>
+<text class="t" xml:space="preserve" x="388" y="622" font-size="13" fill="#245bdb" font-weight="500">支持悬浮栏 T×、右键菜单、命令栏与可自定义快捷键 ⇧⌘\（Win：Ctrl+Shift+\），不与 ⌘\ 侧边栏冲突。</text>
+
+<!-- Floating Selection Bar (cleanly seated between H1 and Paragraph 1) -->
+<g class="s selBar">
+  <rect x="413" y="135" width="424" height="44" rx="8" fill="#1c2a3a" opacity=".09"/>
+  <rect x="415" y="132" width="420" height="42" rx="7" fill="#fff" stroke="#d0d7de"/>
+  <!-- Turn into (¶ v) -->
+  <g transform="translate(428 144) scale(.75)" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4v16"/><path d="M17 4v16"/><path d="M19 4H9.5a4.5 4.5 0 0 0 0 9H13"/></g>
+  <path d="M454 151 l3.5 3.5 3.5-3.5" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="471" y1="143" x2="471" y2="163" stroke="#e5e7eb"/>
+  <!-- Align (≡ v) -->
+  <g transform="translate(483 144) scale(.75)" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round"><path d="M21 5H3"/><path d="M15 12H3"/><path d="M17 19H3"/></g>
+  <path d="M509 151 l3.5 3.5 3.5-3.5" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="526" y1="143" x2="526" y2="163" stroke="#e5e7eb"/>
+  <!-- B, S, I, U, Link, Code -->
+  <rect x="536" y="141" width="24" height="24" rx="4" fill="#eef2ff"/>
+  <g transform="translate(539 144) scale(.75)" fill="none" stroke="#245bdb" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8"/></g>
+  <g transform="translate(571 144) scale(.75)" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><path d="M4 12h16"/></g>
+  <rect x="600" y="141" width="24" height="24" rx="4" fill="#eef2ff"/>
+  <g transform="translate(603 144) scale(.75)" fill="none" stroke="#245bdb" stroke-width="2.1" stroke-linecap="round"><path d="M19 4h-9"/><path d="M14 20H5"/><path d="M15 4 9 20"/></g>
+  <rect x="632" y="141" width="24" height="24" rx="4" fill="#eef2ff"/>
+  <g transform="translate(635 144) scale(.75)" fill="none" stroke="#245bdb" stroke-width="2.1" stroke-linecap="round"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><path d="M4 20h16"/></g>
+  <rect x="664" y="141" width="24" height="24" rx="4" fill="#eef2ff"/>
+  <g transform="translate(667 144) scale(.75)" fill="none" stroke="#245bdb" stroke-width="2.1" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></g>
+  <g transform="translate(699 144) scale(.75)" fill="none" stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></g>
+  <line x1="729" y1="143" x2="729" y2="163" stroke="#e5e7eb"/>
+  <!-- Annotate split (A v) -->
+  <text class="t" xml:space="preserve" x="747" y="157" font-size="14" fill="#1f2329" font-weight="600" text-anchor="middle">A</text>
+  <path d="M739 160 q2.5 -2.2 5 0 t5 0 t5 0" fill="none" stroke="#7c3aed" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M766 151 l3.5 3.5 3.5-3.5" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Clear Formatting Button (T×) -->
+  <g class="s btnClearHi">
+    <rect x="794" y="140" width="26" height="26" rx="5" fill="#245bdb" fill-opacity=".14"/>
+  </g>
+  <g transform="translate(798 144) scale(.75)" fill="none" stroke="#245bdb" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 7V4h16v3"/><path d="M5 20h6"/><path d="M13 4 8 20"/><path d="m15 15 5 5"/><path d="m20 15-5 5"/>
+  </g>
+</g>
+
+<!-- Tooltip above T× button -->
+<g class="s tipClear">
+  <rect x="738" y="99" width="138" height="26" rx="6" fill="#1f2329" fill-opacity=".92"/>
+  <text class="t" xml:space="preserve" x="807" y="116" font-size="12" fill="#fff" font-weight="500" text-anchor="middle">清除样式 (⇧⌘\)</text>
+</g>
+
+<!-- Right-Click Context Menu (for Paragraph 2) -->
+<g class="s ctxMenu">
+  <rect x="668" y="298" width="218" height="260" rx="11" fill="#1c2a3a" opacity=".11"/>
+  <rect x="670" y="295" width="214" height="256" rx="10" fill="#fff" stroke="#d0d7de"/>
+  <text class="t" xml:space="preserve" x="686" y="320" font-size="13" fill="#1f2329">剪切</text><text class="t" xml:space="preserve" x="868" y="320" font-size="11.5" fill="#8f959e" text-anchor="end">⌘X</text>
+  <text class="t" xml:space="preserve" x="686" y="346" font-size="13" fill="#1f2329">复制</text><text class="t" xml:space="preserve" x="868" y="346" font-size="11.5" fill="#8f959e" text-anchor="end">⌘C</text>
+  <text class="t" xml:space="preserve" x="686" y="372" font-size="13" fill="#1f2329">粘贴</text><text class="t" xml:space="preserve" x="868" y="372" font-size="11.5" fill="#8f959e" text-anchor="end">⌘V</text>
+  <text class="t" xml:space="preserve" x="686" y="398" font-size="13" fill="#1f2329">粘贴为纯文本</text><text class="t" xml:space="preserve" x="868" y="398" font-size="11.5" fill="#8f959e" text-anchor="end">⇧⌘V</text>
+  <line x1="680" y1="411" x2="874" y2="411" stroke="#eceff3"/>
+  <text class="t" xml:space="preserve" x="686" y="433" font-size="13" fill="#1f2329">全选</text><text class="t" xml:space="preserve" x="868" y="433" font-size="11.5" fill="#8f959e" text-anchor="end">⌘A</text>
+  <line x1="680" y1="445" x2="874" y2="445" stroke="#eceff3"/>
+  <text class="t" xml:space="preserve" x="686" y="466" font-size="13" fill="#1f2329">加粗</text><text class="t" xml:space="preserve" x="868" y="466" font-size="11.5" fill="#8f959e" text-anchor="end">⌘B</text>
+  <text class="t" xml:space="preserve" x="686" y="490" font-size="13" fill="#1f2329">斜体</text><text class="t" xml:space="preserve" x="868" y="490" font-size="11.5" fill="#8f959e" text-anchor="end">⌘I</text>
+  <g class="s ctxClearHi">
+    <rect x="676" y="498" width="202" height="25" rx="6" fill="#245bdb" fill-opacity=".13"/>
+  </g>
+  <text class="t" xml:space="preserve" x="686" y="515" font-size="13" fill="#245bdb" font-weight="600">清除样式</text><text class="t" xml:space="preserve" x="868" y="515" font-size="11.5" fill="#245bdb" font-weight="500" text-anchor="end">⇧⌘\</text>
+  <text class="t" xml:space="preserve" x="686" y="539" font-size="13" fill="#1f2329">插入表格</text>
+</g>
+
+<!-- Shortcut HUD Pill -->
+<g class="s hudKey">
+  <rect x="572" y="666" width="318" height="38" rx="10" fill="#1f2329" fill-opacity=".90"/>
+  <text class="t" xml:space="preserve" x="731" y="690" font-size="13.5" fill="#fff" font-weight="600" text-anchor="middle">⇧⌘\  /  Ctrl+Shift+\  ·  批量清除样式</text>
+</g>
+
+</g>
+<g class="s ptr"><use href="#cursor"/></g>
+</g></g>
+
+<!-- Bottom 3 Step Captions -->
+<g class="s cap0">
+  <circle cx="96" cy="784" r="4" fill="#2864b8"/>
+  <text class="t" xml:space="preserve" x="110" y="789" font-size="14" fill="#2d3f52" font-weight="500">1. 拖选带样式文本，点悬浮栏 T× 清除</text>
+</g>
+<g class="s cap1">
+  <circle cx="486" cy="784" r="4" fill="#2864b8"/>
+  <text class="t" xml:space="preserve" x="500" y="789" font-size="14" fill="#2d3f52" font-weight="500">2. 正文右键「清除样式」清掉标注与链接</text>
+</g>
+<g class="s cap2">
+  <circle cx="886" cy="784" r="4" fill="#2864b8"/>
+  <text class="t" xml:space="preserve" x="900" y="789" font-size="14" fill="#2d3f52" font-weight="500">3. 多块选中 ⇧⌘\ 批量清除，保留标题与表格</text>
+</g>
+</g></svg>
