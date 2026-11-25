@@ -1,0 +1,364 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" width="960" height="580" role="img" aria-label="ArcMD 页面缩放功能演示：支持 ⌘+/⌘-/⌘0、Ctrl+滚轮与触控板捏合在 50% 至 200% 间等比缩放，非 100% 时右上角显示比例药丸与预设菜单">
+  <defs>
+    <linearGradient id="shellBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87B5C8"/>
+      <stop offset="100%" stop-color="#76A4B8"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1E293B" flood-opacity="0.10"/>
+    </filter>
+    <filter id="menuShadow" x="-16%" y="-12%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+    <filter id="hudShadow" x="-12%" y="-20%" width="124%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.22"/>
+    </filter>
+    <clipPath id="paperClip">
+      <rect x="206" y="46" width="744" height="524" rx="10"/>
+    </clipPath>
+    <style><![CDATA[
+      .ui { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .math { font-family: "Cambria Math", "Times New Roman", Georgia, serif; font-style: italic; }
+
+      /* Document zoom animation (11s loop) */
+      @keyframes docScale {
+        0%, 16%   { transform: translate(272px, 84px) scale(1); }
+        22%, 66%  { transform: translate(252px, 78px) scale(1.24); }
+        72%, 86%  { transform: translate(276px, 82px) scale(0.84); }
+        92%, 100% { transform: translate(272px, 84px) scale(1); }
+      }
+      .doc-stage {
+        transform-box: fill-box;
+        transform-origin: 0 0;
+        animation: docScale 11s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      }
+
+      /* Top-right zoom pill visibility and label switching */
+      @keyframes pill140 {
+        0%, 18%   { opacity: 0; transform: translateY(-2px); }
+        22%, 67%  { opacity: 1; transform: translateY(0); }
+        70%, 100% { opacity: 0; transform: translateY(0); }
+      }
+      @keyframes pill80 {
+        0%, 68%   { opacity: 0; transform: translateY(-2px); }
+        71%, 87%  { opacity: 1; transform: translateY(0); }
+        91%, 100% { opacity: 0; transform: translateY(-2px); }
+      }
+      .pill-140 { animation: pill140 11s ease infinite; }
+      .pill-80  { animation: pill80 11s ease infinite; }
+
+      /* Popover menu opens at 45% - 66% */
+      @keyframes menuPop {
+        0%, 44%   { opacity: 0; transform: translateY(-6px) scale(0.97); }
+        47%, 64%  { opacity: 1; transform: translateY(0) scale(1); }
+        67%, 100% { opacity: 0; transform: translateY(-4px) scale(0.98); }
+      }
+      .zoom-menu {
+        transform-box: fill-box;
+        transform-origin: 70% 0%;
+        animation: menuPop 11s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      }
+
+      /* Menu hover highlight moving to 75% */
+      @keyframes menuItemHover {
+        0%, 52%   { opacity: 0; }
+        55%, 64%  { opacity: 1; }
+        67%, 100% { opacity: 0; }
+      }
+      .menu-hover { animation: menuItemHover 11s ease infinite; }
+
+      /* Pointer glides to pill and down onto highlighted 75% row */
+      @keyframes cursorMove {
+        0%, 36%   { opacity: 0; transform: translate(650px, 210px); }
+        40%       { opacity: 1; transform: translate(735px, 34px); }
+        45%, 51%  { opacity: 1; transform: translate(735px, 26px); }
+        56%, 64%  { opacity: 1; transform: translate(745px, 150px); }
+        68%, 100% { opacity: 0; transform: translate(745px, 150px); }
+      }
+      .cursor { animation: cursorMove 11s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+
+      @keyframes clickRing {
+        0%, 43%   { opacity: 0; transform: scale(0.5); }
+        45%       { opacity: 0.75; transform: scale(1); }
+        49%, 100% { opacity: 0; transform: scale(1.7); }
+      }
+      .click-ring {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: clickRing 11s ease-out infinite;
+      }
+
+      /* Bottom-right phase HUD banners */
+      @keyframes hud1 { 0%, 15% { opacity: 1; } 18%, 94% { opacity: 0; } 96%, 100% { opacity: 1; } }
+      @keyframes hud2 { 0%, 18% { opacity: 0; } 21%, 42% { opacity: 1; } 45%, 100% { opacity: 0; } }
+      @keyframes hud3 { 0%, 44% { opacity: 0; } 47%, 65% { opacity: 1; } 68%, 100% { opacity: 0; } }
+      @keyframes hud4 { 0%, 68% { opacity: 0; } 71%, 87% { opacity: 1; } 90%, 100% { opacity: 0; } }
+      @keyframes hud5 { 0%, 88% { opacity: 0; } 90%, 95% { opacity: 1; } 98%, 100% { opacity: 0; } }
+      .hud-1 { animation: hud1 11s ease infinite; }
+      .hud-2 { animation: hud2 11s ease infinite; }
+      .hud-3 { animation: hud3 11s ease infinite; }
+      .hud-4 { animation: hud4 11s ease infinite; }
+      .hud-5 { animation: hud5 11s ease infinite; }
+
+      /* Extra bottom content (backlinks) visible when zoomed out to 80% */
+      @keyframes backlinkReveal {
+        0%, 68%   { opacity: 0; }
+        73%, 86%  { opacity: 1; }
+        91%, 100% { opacity: 0; }
+      }
+      .backlinks { animation: backlinkReveal 11s ease infinite; }
+    ]]></style>
+  </defs>
+
+  <!-- ArcMD Native Window Shell -->
+  <rect x="0" y="0" width="960" height="580" rx="14" fill="url(#shellBg)"/>
+
+  <!-- Top Bar (Window controls + Nav + Address Pill + Corner Controls) -->
+  <g class="ui">
+    <!-- macOS traffic lights -->
+    <circle cx="24" cy="24" r="5.5" fill="#FF5F57" stroke="#E0443E" stroke-width="0.6"/>
+    <circle cx="42" cy="24" r="5.5" fill="#FEBC2E" stroke="#D89E24" stroke-width="0.6"/>
+    <circle cx="60" cy="24" r="5.5" fill="#28C840" stroke="#1AAB29" stroke-width="0.6"/>
+
+    <!-- Sidebar toggle icon -->
+    <rect x="174" y="17" width="14" height="12" rx="2.5" fill="none" stroke="#1E3A4C" stroke-width="1.4" opacity="0.72"/>
+    <line x1="179" y1="17" x2="179" y2="29" stroke="#1E3A4C" stroke-width="1.3" opacity="0.72"/>
+
+    <!-- Back / Forward / Reload -->
+    <path d="M217 23h-8m0 0l3.5-3.5M209 23l3.5 3.5" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+    <path d="M233 23h8m0 0l-3.5-3.5M241 23l-3.5 3.5" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.30"/>
+    <path d="M264 20.5a4.5 4.5 0 1 0 1.2 4.3" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+
+    <!-- Address bar pill -->
+    <rect x="282" y="10" width="420" height="27" rx="8" fill="#FFFFFF" fill-opacity="0.34"/>
+    <rect x="291" y="16" width="15" height="15" rx="4" fill="#3B82F6" fill-opacity="0.20"/>
+    <text x="298.5" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#1D4ED8">Z</text>
+    <text x="313" y="27.5" font-size="12" fill="#1E3A4C" opacity="0.65">Personal /</text>
+    <text x="373" y="27.5" font-size="12" font-weight="600" fill="#0F172A">ZoomDemo.md</text>
+
+    <!-- Dynamic Zoom Percentage Pill (hidden at 100%, shown at 140% & 80%) -->
+    <g class="pill-140">
+      <rect x="712" y="10" width="46" height="26" rx="7" fill="#FFFFFF" fill-opacity="0.78" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
+      <text x="735" y="27.5" text-anchor="middle" font-size="12" font-weight="600" fill="#0F172A">140%</text>
+    </g>
+    <g class="pill-80">
+      <rect x="716" y="10" width="42" height="26" rx="7" fill="#FFFFFF" fill-opacity="0.78" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
+      <text x="737" y="27.5" text-anchor="middle" font-size="12" font-weight="600" fill="#0F172A">80%</text>
+    </g>
+
+    <!-- Top-right document controls (Page width, MindMap, Word count, Typography, Lock, AI, More) -->
+    <g opacity="0.76" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <!-- Page width icon -->
+      <path d="M770 23h10M773 20l-3 3 3 3M777 20l3 3-3 3"/>
+      <!-- Mindmap icon -->
+      <path d="M794 19h8M794 23h6M794 27h8"/>
+    </g>
+    <text x="816" y="27" font-size="11.5" fill="#1E3A4C" opacity="0.72">212 字</text>
+    <text x="862" y="27.5" font-size="13" font-weight="600" fill="#1E3A4C" opacity="0.76">T</text>
+    <rect x="881" y="20" width="9" height="8" rx="1.5" fill="none" stroke="#1E3A4C" stroke-width="1.35" opacity="0.72"/>
+    <path d="M883.5 20v-2a2 2 0 0 1 4 0v2" fill="none" stroke="#1E3A4C" stroke-width="1.35" opacity="0.72"/>
+    <circle cx="910" cy="23" r="1.4" fill="#1E3A4C" opacity="0.72"/>
+    <circle cx="916" cy="23" r="1.4" fill="#1E3A4C" opacity="0.72"/>
+    <circle cx="922" cy="23" r="1.4" fill="#1E3A4C" opacity="0.72"/>
+  </g>
+
+  <!-- Left Sidebar -->
+  <g class="ui">
+    <!-- Favorite tile -->
+    <rect x="14" y="48" width="178" height="44" rx="12" fill="#FFFFFF" fill-opacity="0.34" stroke="#0F172A" stroke-opacity="0.12" stroke-width="1.5"/>
+    <rect x="93" y="60" width="20" height="20" rx="5.5" fill="#2563EB" fill-opacity="0.18"/>
+    <text x="103" y="74" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1D4ED8">W</text>
+
+    <!-- Space Header -->
+    <circle cx="28" cy="116" r="5" fill="#15803D" opacity="0.85"/>
+    <text x="41" y="120.5" font-size="13" font-weight="600" fill="#0F172A" opacity="0.82">Personal</text>
+    <line x1="18" y1="138" x2="188" y2="138" stroke="#0F172A" stroke-opacity="0.10"/>
+
+    <!-- Active Document Row -->
+    <rect x="14" y="148" width="178" height="36" rx="10" fill="#FFFFFF" fill-opacity="0.74"/>
+    <rect x="24" y="158" width="16" height="16" rx="4.5" fill="#3B82F6" fill-opacity="0.18"/>
+    <text x="32" y="170" text-anchor="middle" font-size="10" font-weight="700" fill="#1D4ED8">Z</text>
+    <text x="48" y="170.5" font-size="13" font-weight="600" fill="#0F172A">ZoomDemo</text>
+
+    <!-- Folder & Secondary Doc -->
+    <path d="M24 198h6l2 2h8v10H24z" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linejoin="round" opacity="0.75"/>
+    <text x="48" y="208" font-size="13" font-weight="500" fill="#0F172A" opacity="0.82">Journal</text>
+
+    <rect x="38" y="226" width="15" height="15" rx="4" fill="#7C3AED" fill-opacity="0.18"/>
+    <text x="45.5" y="237" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6D28D9">I</text>
+    <text x="60" y="238" font-size="12.5" fill="#0F172A" opacity="0.75">Ideas</text>
+
+    <!-- New doc dashed slot -->
+    <rect x="14" y="258" width="178" height="34" rx="10" fill="none" stroke="#0F172A" stroke-opacity="0.16" stroke-dasharray="4 3"/>
+    <text x="103" y="279" text-anchor="middle" font-size="12.5" fill="#0F172A" opacity="0.58">+ 新建文档</text>
+
+    <!-- Bottom Space switcher -->
+    <rect x="20" y="544" width="14" height="12" rx="2.5" fill="none" stroke="#0F172A" stroke-width="1.35" opacity="0.62"/>
+    <circle cx="103" cy="550" r="6" fill="#15803D" opacity="0.85"/>
+    <path d="M178 550h10M183 545v10" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" opacity="0.65"/>
+  </g>
+
+  <!-- Main Document Paper Card -->
+  <rect x="206" y="46" width="744" height="524" rx="10" fill="#FFFFFF" filter="url(#cardShadow)"/>
+
+  <!-- Outline subtle trigger inside paper -->
+  <g opacity="0.45" stroke="#334155" stroke-width="1.5" stroke-linecap="round">
+    <line x1="224" y1="90" x2="235" y2="90"/>
+    <line x1="224" y1="95" x2="233" y2="95"/>
+    <line x1="224" y1="100" x2="235" y2="100"/>
+  </g>
+
+  <!-- Clipped Zoomable Document Content -->
+  <g clip-path="url(#paperClip)">
+    <g class="doc-stage ui">
+      <!-- Page Title -->
+      <text x="0" y="26" font-size="27" font-weight="600" fill="#0F172A">页面缩放演示文档</text>
+
+      <!-- Body Paragraph with Bold, Inline Code & Inline Math -->
+      <text x="0" y="60" font-size="13.5" fill="#1E293B">支持讲解与演示时等比缩放：正文、</text>
+      <text x="218" y="60" font-size="13.5" font-weight="700" fill="#0F172A">粗体</text>
+      <text x="247" y="60" font-size="13.5" fill="#1E293B">、</text>
+      <rect x="261" y="46" width="60" height="19" rx="4" fill="#F1F5F9"/>
+      <text x="291" y="59.5" text-anchor="middle" font-size="12" class="mono" fill="#0F172A">行内代码</text>
+      <text x="325" y="60" font-size="13.5" fill="#1E293B">、行内公式</text>
+      <text x="396" y="60" font-size="14.5" class="math" fill="#0F172A">E = mc</text>
+      <text x="441" y="54" font-size="10" class="math" fill="#0F172A">2</text>
+      <text x="451" y="60" font-size="13.5" fill="#1E293B">与列表同步缩放。</text>
+
+      <!-- H2 -->
+      <text x="0" y="96" font-size="18.5" font-weight="600" fill="#0F172A">核心元素</text>
+
+      <!-- Bullet item -->
+      <circle cx="6" cy="117" r="2.6" fill="#2563EB"/>
+      <text x="18" y="121.5" font-size="13.5" fill="#1E293B">键盘快捷键：</text>
+      <rect x="98" y="108" width="29" height="18" rx="4" fill="#F1F5F9" stroke="#E2E8F0"/>
+      <text x="112.5" y="120.5" text-anchor="middle" font-size="11.5" class="mono" fill="#0F172A">⌘+</text>
+      <text x="132" y="121.5" font-size="13" fill="#64748B">/</text>
+      <rect x="140" y="108" width="29" height="18" rx="4" fill="#F1F5F9" stroke="#E2E8F0"/>
+      <text x="154.5" y="120.5" text-anchor="middle" font-size="11.5" class="mono" fill="#0F172A">⌘-</text>
+      <text x="174" y="121.5" font-size="13" fill="#64748B">/</text>
+      <rect x="182" y="108" width="29" height="18" rx="4" fill="#F1F5F9" stroke="#E2E8F0"/>
+      <text x="196.5" y="120.5" text-anchor="middle" font-size="11.5" class="mono" fill="#0F172A">⌘0</text>
+      <text x="218" y="121.5" font-size="13" fill="#475569">（Windows 为 Ctrl+= / - / 0）</text>
+
+      <!-- Checked task item -->
+      <rect x="0" y="135" width="14" height="14" rx="3.5" fill="#2563EB" fill-opacity="0.12" stroke="#2563EB" stroke-width="1.3"/>
+      <path d="M3.3 142l2.4 2.4 5-5" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="20" y="146.5" font-size="13.5" fill="#64748B" text-decoration="line-through">支持 Ctrl/⌘ + 鼠标滚轮逐级缩放与触控板双指捏合</text>
+
+      <!-- TIP Callout -->
+      <rect x="0" y="164" width="540" height="42" rx="8" fill="#ECFDF3" stroke="#BBF7D0" stroke-width="1"/>
+      <circle cx="21" cy="185" r="5.5" fill="none" stroke="#16A34A" stroke-width="1.5"/>
+      <line x1="21" y1="191.5" x2="21" y2="193.5" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="38" y="189.5" font-size="13" fill="#14532D">缩放比例为 100% 时右上角比例按钮自动隐藏，保持界面安静克制。</text>
+
+      <!-- Go Code Block with Line Numbers -->
+      <rect x="0" y="218" width="540" height="92" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+      <text x="14" y="236" font-size="11" fill="#64748B">Go ⌄</text>
+      <g class="mono" font-size="12">
+        <text x="24" y="258" text-anchor="end" fill="#94A3B8">1</text>
+        <text x="42" y="258" xml:space="preserve"><tspan fill="#D946EF">func</tspan><tspan fill="#334155"> </tspan><tspan fill="#2563EB">StepPageZoom</tspan><tspan fill="#334155">(cur </tspan><tspan fill="#0284C7">float32</tspan><tspan fill="#334155">, delta </tspan><tspan fill="#0284C7">int</tspan><tspan fill="#334155">) </tspan><tspan fill="#0284C7">float32</tspan><tspan fill="#334155"> {</tspan></text>
+
+        <text x="24" y="278" text-anchor="end" fill="#94A3B8">2</text>
+        <text x="64" y="278" xml:space="preserve"><tspan fill="#D946EF">return</tspan><tspan fill="#334155"> </tspan><tspan fill="#2563EB">NormalizePageZoom</tspan><tspan fill="#334155">(cur + </tspan><tspan fill="#0284C7">float32</tspan><tspan fill="#334155">(delta)*</tspan><tspan fill="#7C3AED">0.10</tspan><tspan fill="#334155">)</tspan></text>
+
+        <text x="24" y="298" text-anchor="end" fill="#94A3B8">3</text>
+        <text x="42" y="298" fill="#334155">}</text>
+      </g>
+
+      <!-- Table -->
+      <rect x="0" y="324" width="540" height="106" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+      <path d="M1 332a7 7 0 0 1 7-7h524a7 7 0 0 1 7 7v27H1z" fill="#F8FAFC"/>
+      <line x1="0" y1="359" x2="540" y2="359" stroke="#E2E8F0"/>
+      <line x1="0" y1="395" x2="540" y2="395" stroke="#E2E8F0"/>
+      <line x1="110" y1="324" x2="110" y2="430" stroke="#E2E8F0"/>
+      <line x1="268" y1="324" x2="268" y2="430" stroke="#E2E8F0"/>
+
+      <g font-size="12">
+        <text x="14" y="346" font-weight="600" fill="#334155">档位</text>
+        <text x="124" y="346" font-weight="600" fill="#334155">适用场景</text>
+        <text x="282" y="346" font-weight="600" fill="#334155">布局表现</text>
+
+        <text x="14" y="381" fill="#0F172A">80%</text>
+        <text x="124" y="381" fill="#334155">浏览长文档与宽表</text>
+        <text x="282" y="381" fill="#334155">保持标准列宽，单行容纳更多文字</text>
+
+        <text x="14" y="416" fill="#0F172A">140%</text>
+        <text x="124" y="416" fill="#334155">会议投屏与现场讲解</text>
+        <text x="282" y="416" fill="#334155">标题、正文、公式、代码与表格等比放大</text>
+      </g>
+
+      <!-- Backlinks footer revealed cleanly at 80% -->
+      <g class="backlinks">
+        <line x1="0" y1="454" x2="540" y2="454" stroke="#E2E8F0"/>
+        <text x="0" y="476" font-size="12" font-weight="500" fill="#64748B">反向链接 · 缩小页面可在一屏内浏览更多上下文</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Zoom Popover Menu (shown at 45% - 66%) -->
+  <g class="zoom-menu ui" filter="url(#menuShadow)">
+    <rect x="650" y="40" width="164" height="236" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="668" y="65" font-size="12.5" fill="#0F172A">放大页面</text>
+    <text x="798" y="65" text-anchor="end" font-size="11.5" fill="#94A3B8">⌘=</text>
+
+    <text x="668" y="91" font-size="12.5" fill="#0F172A">缩小页面</text>
+    <text x="798" y="91" text-anchor="end" font-size="11.5" fill="#94A3B8">⌘-</text>
+
+    <text x="668" y="117" font-size="12.5" fill="#0F172A">重置为 100%</text>
+    <text x="798" y="117" text-anchor="end" font-size="11.5" fill="#94A3B8">⌘0</text>
+
+    <line x1="660" y1="130" x2="804" y2="130" stroke="#E2E8F0"/>
+
+    <!-- Hover row highlight on 75% before zooming out -->
+    <rect class="menu-hover" x="656" y="138" width="152" height="24" rx="6" fill="#EFF6FF"/>
+
+    <text x="668" y="154" font-size="12.5" fill="#0F172A">75%</text>
+    <text x="668" y="180" font-size="12.5" fill="#0F172A">100%</text>
+    <text x="668" y="206" font-size="12.5" fill="#0F172A">125%</text>
+    <text x="668" y="232" font-size="12.5" fill="#0F172A">150%</text>
+    <text x="668" y="258" font-size="12.5" fill="#0F172A">200%</text>
+  </g>
+
+  <!-- Subtle click pulse on 140% pill -->
+  <circle class="click-ring" cx="735" cy="23" r="14" fill="none" stroke="#2563EB" stroke-width="2"/>
+
+  <!-- Animated Pointer Cursor -->
+  <g class="cursor">
+    <path d="M0 0 L0 16 L4.5 12.2 L8 19 L10.6 17.8 L7.2 11 L13 11 Z" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bottom-Right Phase Status / Keystroke HUD -->
+  <g class="ui" filter="url(#hudShadow)">
+    <g class="hud-1">
+      <rect x="656" y="520" width="276" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <text x="794" y="541.5" text-anchor="middle" font-size="12.5" font-weight="500" fill="#F8FAFC">默认 100% · 工具栏自动隐藏比例药丸</text>
+    </g>
+    <g class="hud-2">
+      <rect x="614" y="520" width="318" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <rect x="626" y="528" width="42" height="19" rx="5" fill="#334155"/>
+      <text x="647" y="541" text-anchor="middle" font-size="11.5" font-weight="600" class="mono" fill="#F8FAFC">⌘ +</text>
+      <text x="677" y="541.5" font-size="12" fill="#94A3B8">/</text>
+      <rect x="685" y="528" width="84" height="19" rx="5" fill="#334155"/>
+      <text x="727" y="541" text-anchor="middle" font-size="11" font-weight="600" class="mono" fill="#F8FAFC">Ctrl + 滚轮</text>
+      <text x="779" y="541.5" font-size="12.5" font-weight="500" fill="#F8FAFC">等比放大至 140%</text>
+    </g>
+    <g class="hud-3">
+      <rect x="638" y="520" width="294" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <text x="785" y="541.5" text-anchor="middle" font-size="12.5" font-weight="500" fill="#F8FAFC">点击右上角 140% 药丸 · 快速切换预设与复位</text>
+    </g>
+    <g class="hud-4">
+      <rect x="646" y="520" width="286" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <rect x="658" y="528" width="42" height="19" rx="5" fill="#334155"/>
+      <text x="679" y="541" text-anchor="middle" font-size="11.5" font-weight="600" class="mono" fill="#F8FAFC">⌘ -</text>
+      <text x="712" y="541.5" font-size="12.5" font-weight="500" fill="#F8FAFC">缩小至 80% · 保持列宽容纳更多内容</text>
+    </g>
+    <g class="hud-5">
+      <rect x="698" y="520" width="234" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <rect x="710" y="528" width="42" height="19" rx="5" fill="#334155"/>
+      <text x="731" y="541" text-anchor="middle" font-size="11.5" font-weight="600" class="mono" fill="#F8FAFC">⌘ 0</text>
+      <text x="764" y="541.5" font-size="12.5" font-weight="500" fill="#F8FAFC">一键重置回 100%</text>
+    </g>
+  </g>
+</svg>
