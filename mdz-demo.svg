@@ -1,0 +1,543 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" width="960" height="580" role="img" aria-label="ArcMD MDZip (.mdz) 功能演示：一键导出打包文档与图片白板，原地只读打开并浏览多页归档，支持一键解包另存为可编辑 Markdown 文档">
+  <defs>
+    <linearGradient id="shellBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87B5C8"/>
+      <stop offset="100%" stop-color="#76A4B8"/>
+    </linearGradient>
+    <linearGradient id="coverGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DBEAFE"/>
+      <stop offset="50%" stop-color="#E0E7FF"/>
+      <stop offset="100%" stop-color="#DCFCE7"/>
+    </linearGradient>
+    <linearGradient id="photoGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#1E293B" flood-opacity="0.10"/>
+    </filter>
+    <filter id="popShadow" x="-16%" y="-12%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+    <filter id="hudShadow" x="-12%" y="-20%" width="124%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.22"/>
+    </filter>
+    <clipPath id="paperClip">
+      <rect x="206" y="46" width="744" height="524" rx="10"/>
+    </clipPath>
+    <style><![CDATA[
+      .ui { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+      /* 14s 4-stage loop:
+         Stage 1 (0%  - 24%): Export menu -> click "导出 MDZip (.mdz)"
+         Stage 2 (26% - 48%): Toast + Architecture.mdz appears in sidebar + ZIP anatomy card
+         Stage 3 (50% - 76%): Open Architecture.mdz read-only (in-archive multi-page rail + images + whiteboard)
+         Stage 4 (78% - 100%): Click "解包另存为文档" -> unpacked editable .md + toast */
+
+      /* Sidebar active row & newly exported .mdz / unpacked .md rows */
+      @keyframes rowMdActive {
+        0%, 48%   { opacity: 1; }
+        51%, 99%  { opacity: 0; }
+        100%      { opacity: 1; }
+      }
+      @keyframes rowMdzAppear {
+        0%, 25%   { opacity: 0; transform: translateY(-6px); }
+        29%, 96%  { opacity: 1; transform: translateY(0); }
+        99%, 100% { opacity: 0; transform: translateY(0); }
+      }
+      @keyframes rowMdzActive {
+        0%, 48%   { opacity: 0; }
+        51%, 86%  { opacity: 1; }
+        90%, 100% { opacity: 0; }
+      }
+      @keyframes rowUnpackedAppear {
+        0%, 86%   { opacity: 0; transform: translateY(-6px); }
+        90%, 97%  { opacity: 1; transform: translateY(0); }
+        100%      { opacity: 0; transform: translateY(0); }
+      }
+      @keyframes titleOrig {
+        0%, 86%   { opacity: 1; }
+        90%, 98%  { opacity: 0; }
+        100%      { opacity: 1; }
+      }
+      @keyframes titleUnpacked {
+        0%, 86%   { opacity: 0; }
+        90%, 98%  { opacity: 1; }
+        100%      { opacity: 0; }
+      }
+      .row-md-active       { animation: rowMdActive 14s ease infinite; }
+      .row-mdz             { animation: rowMdzAppear 14s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+      .row-mdz-active      { animation: rowMdzActive 14s ease infinite; }
+      .row-unpacked        { animation: rowUnpackedAppear 14s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+      .title-orig          { animation: titleOrig 14s ease infinite; }
+      .title-unpacked      { animation: titleUnpacked 14s ease infinite; }
+
+      /* Address bar & corner chrome switching */
+      @keyframes barEditable {
+        0%, 48%   { opacity: 1; }
+        51%, 86%  { opacity: 0; }
+        90%, 100% { opacity: 1; }
+      }
+      @keyframes barMdz {
+        0%, 48%   { opacity: 0; }
+        51%, 86%  { opacity: 1; }
+        90%, 100% { opacity: 0; }
+      }
+      .bar-editable { animation: barEditable 14s ease infinite; }
+      .bar-mdz      { animation: barMdz 14s ease infinite; }
+
+      /* Stage 1: More menu & Export submenu */
+      @keyframes exportMenus {
+        0%, 4%    { opacity: 0; transform: translateY(-4px) scale(0.98); }
+        7%, 23%   { opacity: 1; transform: translateY(0) scale(1); }
+        26%, 100% { opacity: 0; transform: translateY(-4px) scale(0.98); }
+      }
+      @keyframes subHover {
+        0%, 12%   { opacity: 0; }
+        15%, 23%  { opacity: 1; }
+        26%, 100% { opacity: 0; }
+      }
+      .export-menus {
+        transform-box: fill-box;
+        transform-origin: 90% 0%;
+        animation: exportMenus 14s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      }
+      .sub-hover { animation: subHover 14s ease infinite; }
+
+      /* Stage 2: Bundle anatomy inspector card + export toast */
+      @keyframes bundleCard {
+        0%, 26%   { opacity: 0; transform: translateY(10px) scale(0.96); }
+        30%, 46%  { opacity: 1; transform: translateY(0) scale(1); }
+        49%, 100% { opacity: 0; transform: translateY(-6px) scale(0.98); }
+      }
+      @keyframes toastExport {
+        0%, 26%   { opacity: 0; transform: translateY(8px); }
+        29%, 45%  { opacity: 1; transform: translateY(0); }
+        48%, 100% { opacity: 0; transform: translateY(-4px); }
+      }
+      .bundle-card  { transform-box: fill-box; transform-origin: center; animation: bundleCard 14s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+      .toast-export { animation: toastExport 14s ease infinite; }
+
+      /* Stage 3: Editable canvas vs Read-only MDZ multi-page viewer */
+      @keyframes viewEditable {
+        0%, 48%   { opacity: 1; }
+        51%, 86%  { opacity: 0; }
+        90%, 100% { opacity: 1; }
+      }
+      @keyframes viewMdz {
+        0%, 48%   { opacity: 0; }
+        51%, 86%  { opacity: 1; }
+        90%, 100% { opacity: 0; }
+      }
+      .view-editable { animation: viewEditable 14s ease infinite; }
+      .view-mdz      { animation: viewMdz 14s ease infinite; }
+
+      /* Stage 3 sub-step: switch from index.md to chapters/design.md inside MDZ */
+      @keyframes mdzPage1 {
+        0%, 64%   { opacity: 1; }
+        67%, 87%  { opacity: 0; }
+        90%, 100% { opacity: 1; }
+      }
+      @keyframes mdzPage2 {
+        0%, 64%   { opacity: 0; }
+        67%, 87%  { opacity: 1; }
+        90%, 100% { opacity: 0; }
+      }
+      .mdz-page-1 { animation: mdzPage1 14s ease infinite; }
+      .mdz-page-2 { animation: mdzPage2 14s ease infinite; }
+
+      /* Stage 4: Unpack button pulse + unpacked toast */
+      @keyframes unpackHover {
+        0%, 77%   { opacity: 0; }
+        80%, 86%  { opacity: 1; }
+        89%, 100% { opacity: 0; }
+      }
+      @keyframes toastUnpack {
+        0%, 86%   { opacity: 0; transform: translateY(8px); }
+        89%, 98%  { opacity: 1; transform: translateY(0); }
+        100%      { opacity: 0; transform: translateY(-4px); }
+      }
+      .unpack-hover { animation: unpackHover 14s ease infinite; }
+      .toast-unpack { animation: toastUnpack 14s ease infinite; }
+
+      /* Animated cursor across all 4 stages */
+      @keyframes cursorTrack {
+        0%, 4%    { opacity: 0; transform: translate(860px, 60px); }
+        8%        { opacity: 1; transform: translate(742px, 195px); }
+        16%, 22%  { opacity: 1; transform: translate(672px, 212px); }
+        26%, 44%  { opacity: 0; transform: translate(672px, 212px); }
+        47%       { opacity: 1; transform: translate(118px, 200px); }
+        51%, 57%  { opacity: 0; transform: translate(118px, 200px); }
+        60%       { opacity: 1; transform: translate(290px, 165px); }
+        65%, 73%  { opacity: 1; transform: translate(290px, 165px); }
+        79%, 85%  { opacity: 1; transform: translate(748px, 26px); }
+        89%, 100% { opacity: 0; transform: translate(748px, 26px); }
+      }
+      .cursor { animation: cursorTrack 14s cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+
+      @keyframes ring1 {
+        0%, 20%   { opacity: 0; transform: scale(0.5); }
+        22%       { opacity: 0.8; transform: scale(1); }
+        26%, 100% { opacity: 0; transform: scale(1.7); }
+      }
+      @keyframes ring2 {
+        0%, 63%   { opacity: 0; transform: scale(0.5); }
+        65%       { opacity: 0.8; transform: scale(1); }
+        69%, 100% { opacity: 0; transform: scale(1.7); }
+      }
+      @keyframes ring3 {
+        0%, 83%   { opacity: 0; transform: scale(0.5); }
+        85%       { opacity: 0.8; transform: scale(1); }
+        89%, 100% { opacity: 0; transform: scale(1.7); }
+      }
+      .ring-1 { transform-box: fill-box; transform-origin: center; animation: ring1 14s ease-out infinite; }
+      .ring-2 { transform-box: fill-box; transform-origin: center; animation: ring2 14s ease-out infinite; }
+      .ring-3 { transform-box: fill-box; transform-origin: center; animation: ring3 14s ease-out infinite; }
+
+      /* Bottom-right stage HUD pills */
+      @keyframes hud1 { 0%, 23% { opacity: 1; } 26%, 100% { opacity: 0; } }
+      @keyframes hud2 { 0%, 25% { opacity: 0; } 28%, 47% { opacity: 1; } 50%, 100% { opacity: 0; } }
+      @keyframes hud3 { 0%, 49% { opacity: 0; } 52%, 75% { opacity: 1; } 78%, 100% { opacity: 0; } }
+      @keyframes hud4 { 0%, 77% { opacity: 0; } 80%, 98% { opacity: 1; } 100% { opacity: 0; } }
+      .hud-1 { animation: hud1 14s ease infinite; }
+      .hud-2 { animation: hud2 14s ease infinite; }
+      .hud-3 { animation: hud3 14s ease infinite; }
+      .hud-4 { animation: hud4 14s ease infinite; }
+    ]]></style>
+  </defs>
+
+  <!-- ArcMD Native Window Shell -->
+  <rect x="0" y="0" width="960" height="580" rx="14" fill="url(#shellBg)"/>
+
+  <!-- Top Bar -->
+  <g class="ui">
+    <!-- Traffic lights -->
+    <circle cx="24" cy="24" r="5.5" fill="#FF5F57" stroke="#E0443E" stroke-width="0.6"/>
+    <circle cx="42" cy="24" r="5.5" fill="#FEBC2E" stroke="#D89E24" stroke-width="0.6"/>
+    <circle cx="60" cy="24" r="5.5" fill="#28C840" stroke="#1AAB29" stroke-width="0.6"/>
+
+    <!-- Sidebar toggle -->
+    <rect x="174" y="17" width="14" height="12" rx="2.5" fill="none" stroke="#1E3A4C" stroke-width="1.4" opacity="0.72"/>
+    <line x1="179" y1="17" x2="179" y2="29" stroke="#1E3A4C" stroke-width="1.3" opacity="0.72"/>
+
+    <!-- Nav arrows -->
+    <path d="M217 23h-8m0 0l3.5-3.5M209 23l3.5 3.5" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+    <path d="M233 23h8m0 0l-3.5-3.5M241 23l-3.5 3.5" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.30"/>
+    <path d="M264 20.5a4.5 4.5 0 1 0 1.2 4.3" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" opacity="0.65"/>
+
+    <!-- Address bar: Editable Markdown state -->
+    <g class="bar-editable">
+      <rect x="282" y="10" width="446" height="27" rx="8" fill="#FFFFFF" fill-opacity="0.34"/>
+      <rect x="291" y="16" width="15" height="15" rx="4" fill="#2563EB" fill-opacity="0.18"/>
+      <text x="298.5" y="27" text-anchor="middle" font-size="10" font-weight="700" fill="#1D4ED8">A</text>
+      <text x="313" y="27.5" font-size="12" fill="#1E3A4C" opacity="0.65">Personal /</text>
+      <text class="title-orig" x="373" y="27.5" font-size="12" font-weight="600" fill="#0F172A">Architecture.md</text>
+      <text class="title-unpacked" x="373" y="27.5" font-size="12" font-weight="600" fill="#0F172A">Architecture 2.md</text>
+
+      <!-- Standard document corner icons -->
+      <g opacity="0.76" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M770 23h10M773 20l-3 3 3 3M777 20l3 3-3 3"/>
+        <path d="M794 19h8M794 23h6M794 27h8"/>
+      </g>
+      <text x="816" y="27" font-size="11.5" fill="#1E3A4C" opacity="0.72">486 字</text>
+      <text x="862" y="27.5" font-size="13" font-weight="600" fill="#1E3A4C" opacity="0.76">T</text>
+      <rect x="881" y="20" width="9" height="8" rx="1.5" fill="none" stroke="#1E3A4C" stroke-width="1.35" opacity="0.72"/>
+      <path d="M883.5 20v-2a2 2 0 0 1 4 0v2" fill="none" stroke="#1E3A4C" stroke-width="1.35" opacity="0.72"/>
+      <!-- Active highlight on More button in Stage 1 -->
+      <rect x="903" y="11" width="26" height="24" rx="6" fill="#FFFFFF" fill-opacity="0.45"/>
+      <circle cx="910" cy="23" r="1.4" fill="#0F172A" opacity="0.82"/>
+      <circle cx="916" cy="23" r="1.4" fill="#0F172A" opacity="0.82"/>
+      <circle cx="922" cy="23" r="1.4" fill="#0F172A" opacity="0.82"/>
+    </g>
+
+    <!-- Address bar: Read-only MDZ viewer state -->
+    <g class="bar-mdz">
+      <rect x="282" y="10" width="368" height="27" rx="8" fill="#FFFFFF" fill-opacity="0.34"/>
+      <!-- File archive icon -->
+      <rect x="291" y="16" width="15" height="15" rx="4" fill="#0F766E" fill-opacity="0.18"/>
+      <path d="M296 19.5h5M296 22.5h5M296 25.5h5" stroke="#0F766E" stroke-width="1.3" stroke-linecap="round"/>
+      <text x="313" y="27.5" font-size="12" fill="#1E3A4C" opacity="0.65">Personal /</text>
+      <text x="373" y="27.5" font-size="12" font-weight="600" fill="#0F172A">Architecture.mdz</text>
+      <!-- Subtle MDZ ReadOnly badge inside address pill -->
+      <rect x="480" y="15" width="60" height="17" rx="5" fill="#0F766E" fill-opacity="0.15"/>
+      <text x="510" y="26.5" text-anchor="middle" font-size="10" font-weight="600" fill="#0F766E">MDZ 只读</text>
+
+      <!-- MDZ Corner Controls: Unpack to editable .md button + Page count + Sidebar toggle + Width + More -->
+      <rect x="676" y="10" width="114" height="26" rx="7" fill="#FFFFFF" fill-opacity="0.78" stroke="#FFFFFF" stroke-opacity="0.55"/>
+      <rect class="unpack-hover" x="676" y="10" width="114" height="26" rx="7" fill="#2563EB" fill-opacity="0.14" stroke="#2563EB" stroke-opacity="0.5"/>
+      <text x="733" y="27" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0F172A">解包另存为文档</text>
+
+      <rect x="798" y="10" width="48" height="26" rx="7" fill="#FFFFFF" fill-opacity="0.34"/>
+      <text class="mdz-page-1" x="822" y="27" text-anchor="middle" font-size="11.5" font-weight="500" fill="#1E3A4C">1 / 3 页</text>
+      <text class="mdz-page-2" x="822" y="27" text-anchor="middle" font-size="11.5" font-weight="500" fill="#1E3A4C">2 / 3 页</text>
+
+      <!-- MDZ page rail icon (active) -->
+      <rect x="852" y="11" width="24" height="24" rx="6" fill="#FFFFFF" fill-opacity="0.68"/>
+      <rect x="857" y="17" width="14" height="12" rx="2" fill="none" stroke="#0F172A" stroke-width="1.35"/>
+      <line x1="862" y1="17" x2="862" y2="29" stroke="#0F172A" stroke-width="1.3"/>
+
+      <!-- Page width icon -->
+      <g opacity="0.76" stroke="#1E3A4C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <path d="M884 23h10M887 20l-3 3 3 3M891 20l3 3-3 3"/>
+      </g>
+
+      <circle cx="910" cy="23" r="1.4" fill="#1E3A4C" opacity="0.72"/>
+      <circle cx="916" cy="23" r="1.4" fill="#1E3A4C" opacity="0.72"/>
+      <circle cx="922" cy="23" r="1.4" fill="#1E3A4C" opacity="0.72"/>
+    </g>
+  </g>
+
+  <!-- Left Sidebar -->
+  <g class="ui">
+    <!-- Favorite tile -->
+    <rect x="14" y="48" width="178" height="44" rx="12" fill="#FFFFFF" fill-opacity="0.34" stroke="#0F172A" stroke-opacity="0.12" stroke-width="1.5"/>
+    <rect x="93" y="60" width="20" height="20" rx="5.5" fill="#2563EB" fill-opacity="0.18"/>
+    <text x="103" y="74" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1D4ED8">W</text>
+
+    <!-- Space Header -->
+    <circle cx="28" cy="116" r="5" fill="#15803D" opacity="0.85"/>
+    <text x="41" y="120.5" font-size="13" font-weight="600" fill="#0F172A" opacity="0.82">Personal</text>
+    <line x1="18" y1="138" x2="188" y2="138" stroke="#0F172A" stroke-opacity="0.10"/>
+
+    <!-- Row 1: Architecture.md -->
+    <rect class="row-md-active" x="14" y="148" width="178" height="34" rx="9" fill="#FFFFFF" fill-opacity="0.76"/>
+    <!-- File text icon -->
+    <path d="M25 159h7l3 3v9a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z" fill="none" stroke="#1E3A4C" stroke-width="1.35" opacity="0.78"/>
+    <text x="44" y="169.5" font-size="13" font-weight="500" fill="#0F172A">Architecture</text>
+
+    <!-- Row 2: Newly exported Architecture.mdz (appears at Stage 2, active at Stage 3) -->
+    <g class="row-mdz">
+      <rect class="row-mdz-active" x="14" y="186" width="178" height="34" rx="9" fill="#FFFFFF" fill-opacity="0.76"/>
+      <!-- Monochrome Lucide file-archive icon -->
+      <path d="M25 197h7l3 3v9a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z" fill="none" stroke="#0F766E" stroke-width="1.35"/>
+      <path d="M29.5 201v1.2M29.5 204v1.2M29.5 207v1.2" stroke="#0F766E" stroke-width="1.4" stroke-linecap="round"/>
+      <text x="44" y="207.5" font-size="13" font-weight="500" fill="#0F172A">Architecture</text>
+      <rect x="146" y="196" width="34" height="15" rx="4" fill="#0F766E" fill-opacity="0.14"/>
+      <text x="163" y="206.5" text-anchor="middle" font-size="9" font-weight="600" fill="#0F766E">MDZ</text>
+    </g>
+
+    <!-- Row 3: Unpacked editable copy (appears & becomes active at Stage 4) -->
+    <g class="row-unpacked">
+      <rect x="14" y="224" width="178" height="34" rx="9" fill="#FFFFFF" fill-opacity="0.78"/>
+      <path d="M25 235h7l3 3v9a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z" fill="none" stroke="#2563EB" stroke-width="1.35"/>
+      <text x="44" y="245.5" font-size="13" font-weight="600" fill="#0F172A">Architecture 2</text>
+    </g>
+
+    <!-- Folder & New doc slot below -->
+    <path d="M24 274h6l2 2h8v10H24z" fill="none" stroke="#1E3A4C" stroke-width="1.4" stroke-linejoin="round" opacity="0.72"/>
+    <text x="46" y="284" font-size="13" font-weight="500" fill="#0F172A" opacity="0.78">Journal</text>
+
+    <rect x="14" y="302" width="178" height="34" rx="10" fill="none" stroke="#0F172A" stroke-opacity="0.16" stroke-dasharray="4 3"/>
+    <text x="103" y="323" text-anchor="middle" font-size="12.5" fill="#0F172A" opacity="0.58">+ 新建文档</text>
+
+    <!-- Bottom Space switcher -->
+    <rect x="20" y="544" width="14" height="12" rx="2.5" fill="none" stroke="#0F172A" stroke-width="1.35" opacity="0.62"/>
+    <circle cx="103" cy="550" r="6" fill="#15803D" opacity="0.85"/>
+    <path d="M178 550h10M183 545v10" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" opacity="0.65"/>
+  </g>
+
+  <!-- Main Document Card -->
+  <rect x="206" y="46" width="744" height="524" rx="10" fill="#FFFFFF" filter="url(#cardShadow)"/>
+
+  <!-- Clipped Document Viewport -->
+  <g clip-path="url(#paperClip)" class="ui">
+    <!-- VIEW A: Regular Editable Markdown Document (Stages 1, 2, 4) -->
+    <g class="view-editable">
+      <!-- Cover banner -->
+      <rect x="206" y="46" width="744" height="72" fill="url(#coverGrad)"/>
+      <circle cx="292" cy="82" r="24" fill="#3B82F6" fill-opacity="0.14"/>
+      <circle cx="860" cy="70" r="34" fill="#10B981" fill-opacity="0.14"/>
+
+      <!-- Document Body -->
+      <g transform="translate(274, 146)">
+        <text x="0" y="22" font-size="25" font-weight="600" fill="#0F172A">ArcMD 系统架构笔记</text>
+        <text x="0" y="52" font-size="13.5" fill="#334155">所有图片与 Excalidraw 白板存放在同级 assets/ 目录，导出 .mdz 后可打包成单文件分享。</text>
+
+        <!-- Embedded Local Image Card -->
+        <rect x="0" y="72" width="286" height="154" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+        <rect x="10" y="82" width="266" height="114" rx="7" fill="url(#photoGrad)"/>
+        <!-- Abstract mountain/chart graphic inside photo -->
+        <circle cx="52" cy="116" r="14" fill="#FFFFFF" fill-opacity="0.28"/>
+        <path d="M22 184 L96 126 L152 162 L212 110 L264 184 Z" fill="#FFFFFF" fill-opacity="0.24"/>
+        <text x="14" y="214" font-size="11.5" class="mono" fill="#64748B">assets/diagram.png</text>
+
+        <!-- Embedded Excalidraw Whiteboard Card -->
+        <rect x="304" y="72" width="300" height="154" rx="10" fill="#FFFBEB" stroke="#FDE68A"/>
+        <rect x="322" y="96" width="84" height="44" rx="8" fill="#FFFFFF" stroke="#D97706" stroke-width="1.6"/>
+        <text x="364" y="122" text-anchor="middle" font-size="11.5" font-weight="600" fill="#92400E">index.md</text>
+        <path d="M408 118 L452 118 M446 113 L453 118 L446 123" fill="none" stroke="#B45309" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="456" y="96" width="128" height="44" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="1.6" stroke-dasharray="4 2"/>
+        <text x="520" y="122" text-anchor="middle" font-size="11.5" font-weight="600" fill="#92400E">assets/ + manifest</text>
+        <text x="318" y="214" font-size="11.5" class="mono" fill="#92400E">assets/flow.excalidraw.svg</text>
+
+        <!-- Tip Callout -->
+        <rect x="0" y="244" width="604" height="44" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/>
+        <text x="16" y="271" font-size="13" fill="#1E40AF">提示：分享前无需手动整理附件，接收方在 ArcMD 中双击 .mdz 即可原地阅读。</text>
+
+        <!-- Markdown paragraph below -->
+        <text x="0" y="320" font-size="13.5" fill="#475569">详见章节链接：</text>
+        <text x="96" y="320" font-size="13.5" fill="#2563EB" text-decoration="underline">设计细节 (chapters/design.md)</text>
+      </g>
+    </g>
+
+    <!-- VIEW B: Read-Only Multi-Page MDZ Reader (Stage 3) -->
+    <g class="view-mdz">
+      <!-- Left Collapsible In-Archive Page Rail (196px wide) -->
+      <rect x="206" y="46" width="196" height="524" fill="#F8FAFC"/>
+      <line x1="402" y1="46" x2="402" y2="570" stroke="#E2E8F0"/>
+
+      <text x="222" y="76" font-size="11.5" font-weight="600" fill="#64748B">MDZip 包内文档</text>
+      <rect x="330" y="64" width="56" height="17" rx="5" fill="#0F766E" fill-opacity="0.12"/>
+      <text x="358" y="76" text-anchor="middle" font-size="9.5" font-weight="600" fill="#0F766E">v1.2.0</text>
+
+      <!-- Page item 1: index.md -->
+      <rect class="mdz-page-1" x="216" y="92" width="176" height="32" rx="7" fill="#E0F2FE"/>
+      <text x="228" y="112" font-size="12.5" font-weight="600" fill="#0F172A">index.md</text>
+      <text x="382" y="112" text-anchor="end" font-size="10" fill="#0284C7">入口</text>
+
+      <!-- Subfolder label -->
+      <text x="224" y="144" font-size="11" font-weight="600" fill="#94A3B8">chapters/</text>
+
+      <!-- Page item 2: chapters/design.md (selected in second half of Stage 3) -->
+      <rect class="mdz-page-2" x="216" y="152" width="176" height="32" rx="7" fill="#E0F2FE"/>
+      <text x="234" y="172" font-size="12.5" fill="#1E293B">design.md</text>
+
+      <!-- Page item 3: chapters/api.md -->
+      <text x="234" y="204" font-size="12.5" fill="#475569">api.md</text>
+
+      <!-- Bundled assets summary at bottom of rail -->
+      <line x1="220" y1="454" x2="388" y2="454" stroke="#E2E8F0"/>
+      <text x="222" y="476" font-size="11" font-weight="600" fill="#64748B">包内资源（内存直读）</text>
+      <text x="222" y="496" font-size="11" class="mono" fill="#64748B">assets/diagram.png</text>
+      <text x="222" y="514" font-size="11" class="mono" fill="#64748B">assets/flow.excalidraw.svg</text>
+      <text x="222" y="538" font-size="10.5" fill="#94A3B8">无临时解压 · 不产生历史版本</text>
+
+      <!-- Right Reading Pane: Page 1 (index.md) -->
+      <g class="mdz-page-1">
+        <rect x="402" y="46" width="548" height="58" fill="url(#coverGrad)"/>
+        <g transform="translate(438, 128)">
+          <text x="0" y="20" font-size="22" font-weight="600" fill="#0F172A">ArcMD 系统架构笔记</text>
+          <text x="0" y="46" font-size="13" fill="#475569">直接从 .mdz ZIP 内存流渲染图片与 Excalidraw 白板，完整支持页面缩放与大纲。</text>
+
+          <!-- Rendered In-Archive Image -->
+          <rect x="0" y="64" width="224" height="132" rx="9" fill="#F8FAFC" stroke="#E2E8F0"/>
+          <rect x="8" y="72" width="208" height="96" rx="6" fill="url(#photoGrad)"/>
+          <circle cx="42" cy="100" r="11" fill="#FFFFFF" fill-opacity="0.28"/>
+          <path d="M18 158 L76 112 L122 140 L170 98 L208 158 Z" fill="#FFFFFF" fill-opacity="0.24"/>
+          <text x="12" y="184" font-size="10.5" class="mono" fill="#0F766E">ZIP://assets/diagram.png</text>
+
+          <!-- Rendered In-Archive Whiteboard -->
+          <rect x="238" y="64" width="234" height="132" rx="9" fill="#FFFBEB" stroke="#FDE68A"/>
+          <rect x="252" y="88" width="76" height="36" rx="7" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
+          <text x="290" y="110" text-anchor="middle" font-size="11" font-weight="600" fill="#92400E">index.md</text>
+          <path d="M332 106 L362 106 M357 102 L363 106 L357 110" fill="none" stroke="#B45309" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="366" y="88" width="92" height="36" rx="7" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+          <text x="412" y="110" text-anchor="middle" font-size="10.5" font-weight="600" fill="#92400E">只读白板预览</text>
+          <text x="250" y="184" font-size="10.5" class="mono" fill="#92400E">ZIP://assets/flow.excalidraw.svg</text>
+
+          <rect x="0" y="214" width="472" height="40" rx="8" fill="#F0FDF4" stroke="#BBF7D0"/>
+          <text x="14" y="239" font-size="12.5" fill="#166534">点击左侧文档栏或正文相对链接，可在多页 .mdz 内无缝跳转阅读。</text>
+        </g>
+      </g>
+
+      <!-- Right Reading Pane: Page 2 (chapters/design.md) -->
+      <g class="mdz-page-2" transform="translate(438, 86)">
+        <text x="0" y="0" font-size="11" class="mono" fill="#0F766E">chapters/design.md</text>
+        <text x="0" y="34" font-size="22" font-weight="600" fill="#0F172A">架构设计细节</text>
+        <text x="0" y="64" font-size="13" fill="#334155">子目录 Markdown 通过相对路径引用归档根目录下的共享资源：</text>
+
+        <rect x="0" y="82" width="472" height="66" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+        <text x="16" y="106" font-size="12" class="mono" fill="#334155">![架构图](../assets/diagram.png)</text>
+        <text x="16" y="128" font-size="12" class="mono" fill="#0F766E">→ 按 Spec §9.3 解析为 assets/diagram.png（NFC 大小写敏感）</text>
+
+        <rect x="0" y="166" width="472" height="106" rx="9" fill="#F8FAFC" stroke="#E2E8F0"/>
+        <text x="16" y="192" font-size="12.5" font-weight="600" fill="#0F172A">安全与规范校验</text>
+        <text x="16" y="216" font-size="12.5" fill="#334155">• 拒绝 ../ 路径穿越、符号链接、加密压缩包与 Zip Bomb</text>
+        <text x="16" y="238" font-size="12.5" fill="#334155">• 严格执行 §5.5 入口发现规则，入口不明确时展示文件选择器</text>
+        <text x="16" y="260" font-size="12.5" fill="#334155">• 需要修改内容时，点右上角「解包另存为文档」一键提取到空间</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Stage 1 Overlay: More Menu + Export Submenu -->
+  <g class="export-menus ui" filter="url(#popShadow)">
+    <!-- More menu -->
+    <rect x="772" y="40" width="160" height="196" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="788" y="64" font-size="12" fill="#334155">专注模式</text>
+    <text x="788" y="90" font-size="12" fill="#334155">目录</text>
+    <text x="788" y="116" font-size="12" fill="#334155">版本历史…</text>
+    <line x1="782" y1="128" x2="922" y2="128" stroke="#E2E8F0"/>
+    <!-- Highlighted Export submenu parent -->
+    <rect x="778" y="136" width="148" height="26" rx="6" fill="#EFF6FF"/>
+    <text x="788" y="153" font-size="12" font-weight="600" fill="#1D4ED8">导出</text>
+    <text x="916" y="153" text-anchor="end" font-size="11" fill="#1D4ED8">▸</text>
+    <text x="788" y="182" font-size="12" fill="#334155">页面缩放</text>
+    <text x="788" y="208" font-size="12" fill="#334155">打印…</text>
+
+    <!-- Export submenu -->
+    <rect x="598" y="128" width="170" height="114" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="614" y="152" font-size="12" fill="#334155">导出 Markdown 文件</text>
+    <text x="614" y="176" font-size="12" fill="#334155">导出 PDF</text>
+    <text x="614" y="200" font-size="12" fill="#334155">导出 HTML 网页</text>
+    <!-- New MDZip option highlighted -->
+    <rect class="sub-hover" x="604" y="208" width="158" height="26" rx="6" fill="#EFF6FF"/>
+    <text x="614" y="225" font-size="12" font-weight="600" fill="#0F766E">导出 MDZip (.mdz)</text>
+  </g>
+
+  <!-- Stage 2 Overlay: MDZip Package Anatomy Card -->
+  <g class="bundle-card ui" filter="url(#popShadow)">
+    <rect x="616" y="110" width="308" height="202" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-opacity="0.35" stroke-width="1.2"/>
+    <rect x="616" y="110" width="308" height="36" rx="12" fill="#F0FDFA"/>
+    <rect x="616" y="134" width="308" height="12" fill="#F0FDFA"/>
+    <text x="634" y="133" font-size="12.5" font-weight="600" fill="#0F766E">Architecture.mdz（MDZip v1.2.0）</text>
+    <g class="mono" font-size="11.5" fill="#334155">
+      <text x="634" y="168">├── <tspan fill="#0284C7" font-weight="600">manifest.json</tspan>  <tspan fill="#94A3B8">spec 1.2.0</tspan></text>
+      <text x="634" y="192">├── <tspan fill="#0F172A" font-weight="600">index.md</tspan>       <tspan fill="#94A3B8">UTF-8 · LF</tspan></text>
+      <text x="634" y="216">└── <tspan fill="#0F766E" font-weight="600">assets/</tspan></text>
+      <text x="660" y="240">├── diagram.png</text>
+      <text x="660" y="264">└── flow.excalidraw.svg</text>
+    </g>
+    <text x="634" y="294" font-size="11" fill="#64748B">默认 assets/ 保留原相对路径，自定义附件自动收拢</text>
+  </g>
+
+  <!-- Stage 2 & Stage 4 Toasts -->
+  <g class="toast-export ui" filter="url(#hudShadow)">
+    <rect x="230" y="518" width="276" height="34" rx="9" fill="#0F766E"/>
+    <text x="368" y="539.5" text-anchor="middle" font-size="12" font-weight="500" fill="#FFFFFF">已导出 Architecture.mdz（含 2 项资源）</text>
+  </g>
+  <g class="toast-unpack ui" filter="url(#hudShadow)">
+    <rect x="230" y="518" width="308" height="34" rx="9" fill="#2563EB"/>
+    <text x="384" y="539.5" text-anchor="middle" font-size="12" font-weight="500" fill="#FFFFFF">已解包为 Architecture 2.md，可直接编辑</text>
+  </g>
+
+  <!-- Click pulses -->
+  <circle class="ring-1" cx="672" cy="220" r="14" fill="none" stroke="#0F766E" stroke-width="2"/>
+  <circle class="ring-2" cx="290" cy="168" r="14" fill="none" stroke="#2563EB" stroke-width="2"/>
+  <circle class="ring-3" cx="733" cy="23" r="14" fill="none" stroke="#2563EB" stroke-width="2"/>
+
+  <!-- Pointer cursor -->
+  <g class="cursor">
+    <path d="M0 0 L0 16 L4.5 12.2 L8 19 L10.6 17.8 L7.2 11 L13 11 Z" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Bottom-Right Stage HUD -->
+  <g class="ui" filter="url(#hudShadow)">
+    <g class="hud-1">
+      <rect x="576" y="520" width="356" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <text x="754" y="541.5" text-anchor="middle" font-size="12" font-weight="500" fill="#F8FAFC">1/4 · 更多 → 导出 MDZip (.mdz)，一键打包文档与资源</text>
+    </g>
+    <g class="hud-2">
+      <rect x="562" y="520" width="370" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <text x="747" y="541.5" text-anchor="middle" font-size="12" font-weight="500" fill="#F8FAFC">2/4 · 自动生成 manifest.json 并收拢图片与白板至同级 .mdz</text>
+    </g>
+    <g class="hud-3">
+      <rect x="556" y="520" width="376" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <text x="744" y="541.5" text-anchor="middle" font-size="12" font-weight="500" fill="#F8FAFC">3/4 · 原地只读打开 .mdz：内存直读图片白板 + 多页文档侧栏</text>
+    </g>
+    <g class="hud-4">
+      <rect x="580" y="520" width="352" height="34" rx="10" fill="#0F172A" fill-opacity="0.88"/>
+      <text x="756" y="541.5" text-anchor="middle" font-size="12" font-weight="500" fill="#F8FAFC">4/4 · 一键「解包另存为文档」，提取 .md 与资源继续编辑</text>
+    </g>
+  </g>
+</svg>
